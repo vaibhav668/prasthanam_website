@@ -22,8 +22,8 @@ import { withPhotos } from "../lib/photos";
  */
 const items: Project[] = [
   {
-    id: "sample-line-follower",
-    title: "Sample Line Follower",
+    id: "leopard_detection_alert2",
+    title: "Leopard_detection_alert",
     tagline: "SAMPLE — PID-tuned bot that reads the track at speed.",
     description:
       "SAMPLE PROJECT. Replace this with a real write-up: what problem it solved, what broke, what you learned. A line follower with an IR sensor array and a tuned PID loop is a classic first build.",
@@ -39,19 +39,17 @@ const items: Project[] = [
     team: ["member-01", "member-03"],
   },
   {
-    id: "sample-robo-war",
-    title: "Sample Robo-War Bot",
-    tagline: "SAMPLE — wedge chassis, spinner weapon, zero mercy.",
+    id: "leopard_detection_alert",
+    title: "Leopard_detection_alert",
+    tagline: "Real-time leopard detection with instant campus alerts.",
     description:
       "SAMPLE PROJECT. A combat robot built for arena events. Describe the drive train, the weapon, and the one match where everything went wrong.",
     year: 2026,
     status: "ongoing",
     verse: "comic",
-    tech: ["BLDC", "CAD", "RC"],
+    tech: ["OPENCV", "YOLOV8", "PYTHON","FASTAPI"],
     specs: [
-      { label: "Weight class", value: "TBA" },
-      { label: "Weapon", value: "Horizontal spinner" },
-      { label: "Drive", value: "4WD" },
+     
     ],
     team: ["member-02"],
   },

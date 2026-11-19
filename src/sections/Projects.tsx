@@ -41,9 +41,7 @@ export default function Projects() {
                   viewport={{ once: true, margin: "-8% 0px" }}
                   transition={{ duration: 0.4, delay: (i % 3) * 0.06 }}
                 >
-                  {/* broken grid: every 2nd card sits lower (static transform on an inner wrapper,
-                      so framer-motion's inline transform on the li doesn't cancel it) */}
-                  <div className={`h-full ${i % 2 ? "sm:translate-y-10" : ""}`}>
+                  <div className="h-full">
                     <ProjectCard project={p} index={i} onOpen={() => openProject(p)} />
                   </div>
                 </m.li>

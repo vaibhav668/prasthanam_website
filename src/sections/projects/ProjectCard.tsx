@@ -40,9 +40,9 @@ export function ProjectCard({ project, index, onOpen }: { project: Project; inde
           <span className={`px-1.5 py-0.5 font-semibold ${STATUS_TONE[project.status]}`}>{project.status}</span>
         </div>
 
-        <div className="relative aspect-[16/11] w-full overflow-hidden">
+        <div className="relative aspect-video w-full overflow-hidden">
           {project.image ? (
-            <img src={project.image} alt="" loading="lazy" decoding="async" width={640} height={440} className="h-full w-full object-cover mix-blend-luminosity" />
+            <img src={project.image} alt="" loading="lazy" decoding="async" width={640} height={360} className="h-full w-full object-cover" />
           ) : (
             <ProjectArt project={project} />
           )}
