@@ -1,5 +1,5 @@
 /**
- * SECTION COPY — headings, labels, empty states, and form options for every
+ * SECTION COPY — headings, labels and empty states for every
  * section. Edit text here; components never hard-code copy.
  *
  * label    Mono spec label, shown as "[ 02 / LABEL ]".
@@ -25,10 +25,7 @@ export const sections = {
     label: "PROJECTS",
     title: "Multiverse of builds.",
     kicker: "Every build lives in its own dimension. Hover to tear through, open one for the spec sheet.",
-    filterStatus: "Status",
-    filterTech: "Tech",
-    all: "All",
-    empty: "No builds match. Clear a filter, or go build one.",
+    empty: "No builds yet. Go build one.",
     open: "Open spec sheet",
     specsLabel: "Spec sheet",
     teamLabel: "Built by",
@@ -55,6 +52,12 @@ export const sections = {
     title: "Threads in time.",
     tabs: { upcoming: "Upcoming", past: "Past" },
     register: "Register",
+    report: "Report",
+    reportTitle: "Event report",
+    openPdf: "Open full report",
+    highlights: "Highlights",
+    pages: "pages",
+    noFile: "Full PDF coming soon.",
     tba: "Date TBA",
     empty: { upcoming: "Nothing scheduled yet. Watch this thread.", past: "No past events logged yet." },
   },
@@ -67,18 +70,6 @@ export const sections = {
     all: "All years",
     view: "View photo",
     empty: "Nothing logged yet. The first entry is yours to earn.",
-  },
-  reports: {
-    label: "REPORTS",
-    title: "Field reports.",
-    kicker: "Event write-ups, workshop notes, technical reports and the annual record.",
-    all: "All",
-    types: { event: "Event", workshop: "Workshop", technical: "Technical", annual: "Annual" },
-    open: "Read report",
-    soon: "Coming soon",
-    pages: "pp.",
-    tba: "Date TBA",
-    empty: "No reports filed yet.",
   },
   updates: {
     label: "UPDATES",
@@ -118,35 +109,6 @@ export const sections = {
     label: "FAQ",
     title: "Questions, answered.",
     empty: "No questions yet. Ask us.",
-  },
-  join: {
-    label: "JOIN",
-    title: "Get bitten by the bug.",
-    kicker: "Fill this in and we'll reach out before the next recruitment drive. No experience needed. Curiosity required.",
-    fields: {
-      name: { label: "Name", placeholder: "Your full name" },
-      branch: { label: "Branch", placeholder: "Select branch" },
-      year: { label: "Year", placeholder: "Select year" },
-      interest: { label: "Interest", placeholder: "What pulls you in?" },
-      why: { label: "Why join?", placeholder: "A few lines about what you want to build or learn" },
-    },
-    branches: ["CSE", "ECE", "EE", "ME", "CE", "BT", "Other"],
-    years: ["1st Year", "2nd Year", "3rd Year", "4th Year"],
-    // interests are taken from about.focusAreas, plus:
-    extraInterests: ["Not sure yet"],
-    errors: {
-      name: "Tell us your name (2+ characters).",
-      branch: "Pick your branch.",
-      year: "Pick your year.",
-      interest: "Pick an interest.",
-      why: "A little more, please (20+ characters).",
-      network: "Signal lost. Check your connection and try again, or email us.",
-    },
-    submit: "Transmit",
-    sending: "Transmitting…",
-    successTitle: "NEW AGENT INITIALIZED",
-    successBody: "We've got your details. Watch the Events section for the next drive.",
-    again: "Submit another",
   },
   notFound: {
     code: "ERR 404",

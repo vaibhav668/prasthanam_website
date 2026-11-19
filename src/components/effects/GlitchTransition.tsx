@@ -24,7 +24,7 @@ export function GlitchTransition({ children, active, className = "" }: Props) {
   );
 }
 
-/** Full-screen tear flash, used for modal opens and the Join success state. */
+/** Full-screen tear flash, used for project modal opens. */
 export function GlitchFlash({ show }: { show: boolean }) {
   if (!show) return null;
   return (

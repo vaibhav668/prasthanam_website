@@ -10,7 +10,7 @@ import type { TerminalCommand } from "../types/content";
  *                help          → list every non-hidden command
  *                listProjects  → print projects from data/projects.ts
  *                listTeam      → print team from data/team.ts
- *                scrollToJoin  → close terminal and scroll to #join
+ *                contact       → print the club email and social links
  *                clear / exit
  * hidden       true → works, but isn't listed in help.
  */
@@ -26,7 +26,7 @@ export const terminalCommands: TerminalCommand[] = [
   },
   { cmd: "ls projects", description: "list builds", action: "listProjects" },
   { cmd: "ls team", description: "list agents", action: "listTeam" },
-  { cmd: "sudo join", description: "request access (opens the join form)", action: "scrollToJoin" },
+  { cmd: "sudo join", description: "how to get in touch / join", action: "contact" },
   { cmd: "clear", description: "clear the screen", action: "clear" },
   { cmd: "exit", description: "close terminal", action: "exit" },
   { cmd: "p8", description: "", hidden: true, output: ["  /\\(o)/\\   P-8 says hi.", " /  |  |  \\  8 legs, 1 eye, 0 bugs (lies)."] },

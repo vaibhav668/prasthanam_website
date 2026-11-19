@@ -8,7 +8,7 @@ import type { Update } from "../types/content";
  * title   Headline.
  * body    One short paragraph.
  * tag     "announcement" | "recruitment" | "result" | "general".
- * link    Optional { label, url } button ("#join" works for in-page links).
+ * link    Optional { label, url } button (a URL, or a section anchor like "#events").
  * pinned  Optional. true → always shown first.
  *
  * ALL ENTRIES BELOW ARE SAMPLE PLACEHOLDERS (dates included).
@@ -20,7 +20,7 @@ export const updates: Update[] = [
     title: "Sample: Recruitment drive opens",
     body: "SAMPLE — first-years from every branch can apply. No experience needed.",
     tag: "recruitment",
-    link: { label: "Apply", url: "#join" },
+    link: { label: "Apply", url: "https://example.com/apply" },
     pinned: true,
   },
   {

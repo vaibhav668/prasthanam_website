@@ -33,7 +33,7 @@ export default function Updates() {
   return (
     <Section id="updates">
       <div className="wrap">
-        <SectionHeader id="updates" index={8} label={copy.label} title={copy.title} kicker={<p>{copy.kicker}</p>} />
+        <SectionHeader id="updates" index={7} label={copy.label} title={copy.title} kicker={<p>{copy.kicker}</p>} />
 
         {updates.length === 0 ? (
           <EmptyState message={copy.empty} />

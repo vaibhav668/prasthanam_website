@@ -14,7 +14,9 @@ src/assets/photos/
 
 ## How it works
 1. Find the item's `id` in its data file (`src/data/projects.ts`, `team.ts`, `events.ts`, `achievements.ts`, `alumni.ts`).
-2. Save the photo in the matching folder as `<id>.webp` (or `.avif` / `.jpg` / `.png`).
+2. Save the photo in the matching folder, named `<id>` plus **your file's own extension**:
+   `member-01.jpg`, `member-01.jpeg`, `member-01.png`, `member-01.JPG` and `member-01.webp` all work.
+   Rename `IMG_4821.JPG` → `member-01.JPG` and you're done. No conversion needed.
 3. Save. The site picks it up. Items without a photo keep their placeholder (initials, drawn trophy, schematic).
 
 If you save a photo whose name matches no `id`, the dev console prints a warning listing the valid ids.
@@ -29,7 +31,14 @@ To use a photo from somewhere else (a URL, or a file in `/public`), set `image:`
 | `achievements/` | 16:10 | 1280 × 800 | Opens full size on click |
 | `events/` | 16:9 | 1280 × 720 | Shown at the top of the event card |
 
-Keep each file under ~200 KB. Convert with `cwebp -q 78 in.jpg -o out.webp` or squoosh.app.
+**Phone photos are often 3–6 MB, which is far too heavy.** Resize them to the sizes above and keep each under ~200 KB. Convert with `cwebp -q 78 in.jpg -o out.webp` or squoosh.app.
+
+## Formats
+| Works | Doesn't work |
+|---|---|
+| `.webp` `.avif` `.jpg` `.jpeg` `.png` `.svg` (upper or lower case) | `.heic` / `.heif` (iPhone default; browsers can't show them. Export as JPG first, or set the iPhone to "Most Compatible") |
+
+If two files share an id (`member-01.png` and `member-01.webp`), webp is used.
 
 ## Not in here
 - **Gallery** photos: `public/images/gallery/` + `src/data/gallery.ts` (they need alt text and captions, so they're listed one by one).

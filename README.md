@@ -26,21 +26,20 @@ array is empty. To add a member, project or event, edit the data file and nothin
 
 | File | What it controls |
 |---|---|
-| `src/config/site.ts` | Club name, tagline, address, email, socials, **form endpoint**, feature flags, nav links, 3D model path |
+| `src/config/site.ts` | Club name, tagline, address, email, socials, feature flags, nav links, 3D model path |
 | `src/data/hero.ts` | Hero title, Sanskrit line, subline, CTAs, marquee words, boot-intro status lines |
 | `src/data/about.ts` | Mission paragraphs, stat counters, focus areas |
 | `src/data/projects.ts` | Projects (`verse` picks the card style: `blueprint` / `comic` / `crt` / `thermal`) |
 | `src/data/team.ts` | Members, shown as nodes on a rotating web with a detail card (`tier`: `faculty` / `core` / `lead` / `member`; order around the ring follows tier; core gets red rings + a CLEARANCE ribbon) |
-| `src/data/events.ts` | Events (`status`: `upcoming` / `past`; `date`: ISO `"2026-02-14"` or `"TBA"`) |
+| `src/data/events.ts` | Events and workshops (`status`: `upcoming` / `past`; `date`: ISO `"2026-02-14"` or `"TBA"`). Add a `report` to get a small **Report** button on the card; drop `<event id>.pdf` into `src/assets/reports/` for the PDF |
 | `src/data/achievements.ts` | Trophy log |
-| `src/data/reports.ts` | Reports (PDFs go in `public/reports/`, or link any public URL; `type`: `event` / `workshop` / `technical` / `annual`) |
 | `src/data/updates.ts` | News / announcements feed (`pinned: true` keeps one on top; `tag`: `announcement` / `recruitment` / `result` / `general`) |
 | `src/data/alumni.ts` | Alumni, grouped by `batch` (e.g. `"2020–2024"`); photos in `public/images/alumni/` |
 | `src/data/gallery.ts` | Gallery images (always give `alt`; give `width`/`height` to avoid layout shift) |
 | `src/data/sponsors.ts` | Sponsors (empty array → "sponsor us" empty state) |
 | `src/data/faq.ts` | FAQ accordion |
 | `src/data/terminal.ts` | Easter-egg terminal commands |
-| `src/data/sections.ts` | Section headings, labels, empty-state messages, Join form options and error text, 404 copy |
+| `src/data/sections.ts` | Section headings, labels, empty-state messages, 404 copy |
 
 Types for all of the above are in `src/types/content.ts`. TypeScript will flag a
 missing or misspelled field when you run `npm run dev` or `npm run build`.
@@ -134,24 +133,7 @@ Fonts (Unbounded / Archivo / JetBrains Mono) load from Google Fonts in `index.ht
 `globals.css` defines metric-matched fallback faces so the font swap doesn't shift layout.
 If you change a font, update or remove its `… Fallback` `@font-face`.
 
-## 4. Join form endpoint
-
-Edit `site.form` in `src/config/site.ts`:
-
-- **Formspree (recommended):** create a form at formspree.io and set
-  `endpoint: "https://formspree.io/f/xxxxxxx"`, `mode: "json"`. Any endpoint that
-  accepts a JSON POST works the same way (Getform, Basin, a serverless function…).
-- **Google Forms:** set `mode: "google-form"` and
-  `endpoint: "https://docs.google.com/forms/d/e/<FORM_ID>/formResponse"`, then map each
-  field to its `entry.XXXXXXX` id in `googleFieldMap` (use the form's "Get pre-filled
-  link" to find them). Google doesn't send CORS headers, so the site can't read the
-  response; it assumes success.
-- **Empty endpoint (`""`):** demo mode. No request is sent, but the success state still
-  shows, with a note.
-
-Fields sent: `name`, `branch`, `year`, `interest`, `why`. Validation runs client-side.
-
-## 5. Swapping in the real 3D model
+## 4. Swapping in the real 3D model
 
 P-8 is currently built from primitives in `src/components/three/SpiderBot.tsx`, so it
 works without any model file. Once a Blender model exists:
@@ -169,7 +151,7 @@ works without any model file. Once a Blender model exists:
 The loader (`GltfBot.tsx`) is code-split, so drei and the GLTF/Draco loaders only
 download when a model is set. Draco decoding uses drei's default decoder CDN.
 
-## 6. Feature flags (`site.features`)
+## 5. Feature flags (`site.features`)
 
 | Flag | Effect |
 |---|---|
@@ -180,7 +162,7 @@ download when a model is set. Draco decoding uses drei's default decoder CDN.
 | `xray` | Blueprint/wireframe toggle in the navbar |
 | `smoothScroll` | Lenis smooth scroll (desktop only; never on touch) |
 
-## 7. Performance notes
+## 6. Performance notes
 
 - **One WebGL canvas** (the hero), lazy-loaded after first paint and idle, only on
   desktop-class devices (≥ 900 px wide, fine pointer, ≥ 4 cores / 4 GB, WebGL available,
@@ -195,7 +177,7 @@ download when a model is set. Draco decoding uses drei's default decoder CDN.
 - Lighthouse (local production build): mobile 99 / 100 / 100 / 100,
   desktop 100 / 100 / 100 / 100. Mobile LCP ≈ 2.0 s, CLS ≈ 0.001, TBT ≈ 20–40 ms.
 
-## 8. Deploying
+## 7. Deploying
 
 **Vercel:** import the repo. Framework preset "Vite", build `npm run build`,
 output `dist`. `vercel.json` already rewrites unknown routes to `index.html`
@@ -220,7 +202,7 @@ src/
     three/              HeroScene, SpiderBot, WebStrands, GltfBot, SceneFallback, P8Svg
     effects/            WebShot, SpiderSense, GlitchTransition, Terminal, BootIntro
   sections/             Hero, Marquee, About, Projects, Team, Events, Achievements,
-                        Gallery, Sponsors, FAQ, Join
+                        Gallery, Sponsors, FAQ
   hooks/                useDeviceTier, useReducedMotion, useInView, usePointer
   pages/                Home, NotFound
   lib/                  scroll helpers, P-8 shared state, UI event bus

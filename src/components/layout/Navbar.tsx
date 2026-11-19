@@ -91,14 +91,6 @@ export function Navbar() {
                 &gt;_
               </button>
             )}
-            <a
-              href="#join"
-              onClick={(e) => handleAnchorClick(e, "#join")}
-              className="ss tap mono hidden items-center bg-red-ui px-4 text-[12px] font-semibold uppercase tracking-[0.12em] text-paper md:inline-flex"
-              data-text="Join"
-            >
-              Join
-            </a>
             <button
               type="button"
               className="tap mono inline-flex items-center gap-2 px-2 text-[12px] uppercase tracking-[0.1em] text-paper xl:hidden"

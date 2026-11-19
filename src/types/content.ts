@@ -52,6 +52,20 @@ export interface Event {
   registerLink?: string;
   image?: string;
   status: "upcoming" | "past";
+  /** Report for this event/workshop. Shows a small "Report" button on the card. */
+  report?: EventReport;
+}
+
+export interface EventReport {
+  /** Short write-up shown in the report pop-up (what happened, attendance, results). */
+  summary?: string;
+  /** Optional bullet points ("42 participants", "Winner: Team X"). */
+  highlights?: string[];
+  /** PDF link. Normally leave out: drop "<event id>.pdf" into src/assets/reports/ and it's found automatically. */
+  file?: string;
+  pages?: number;
+  /** "Documentation Team" */
+  author?: string;
 }
 
 export type Medal = "gold" | "silver" | "bronze" | "special";
@@ -136,24 +150,9 @@ export interface TerminalCommand {
   /** Static text lines to print. Use {projects} / {team} tokens to inject live data. */
   output?: string[];
   /** Special behaviour handled by the terminal component. */
-  action?: "clear" | "exit" | "scrollToJoin" | "listProjects" | "listTeam" | "help";
+  action?: "clear" | "exit" | "contact" | "listProjects" | "listTeam" | "help";
   /** Hidden commands don't appear in `help`. */
   hidden?: boolean;
-}
-
-export type ReportType = "event" | "workshop" | "technical" | "annual";
-
-export interface Report {
-  id: string;
-  title: string;
-  /** ISO date "2026-03-14" or "TBA" */
-  date: string;
-  type: ReportType;
-  summary: string;
-  /** PDF in /public/reports/ ("/reports/arduino-101.pdf") or any URL (Google Drive etc.) */
-  file?: string;
-  pages?: number;
-  author?: string;
 }
 
 export type UpdateTag = "announcement" | "recruitment" | "result" | "general";

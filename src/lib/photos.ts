@@ -4,7 +4,7 @@
  * Photos live in  src/assets/photos/<category>/<id>.<ext>
  *   categories:  projects · achievements · events · team · alumni
  *   <id>:        the item's `id` from its data file (src/data/*.ts)
- *   <ext>:       webp (best), avif, jpg, jpeg, png or svg
+ *   <ext>:       webp (best), avif, jpg, jpeg, png or svg (upper or lower case, e.g. .JPG)
  *
  * Drop `member-01.webp` into src/assets/photos/team/ and the member with
  * id "member-01" gets that photo. No data-file edit needed. Vite optimises and
@@ -16,7 +16,7 @@
 
 export type PhotoCategory = "projects" | "achievements" | "events" | "team" | "alumni";
 
-const files = import.meta.glob("../assets/photos/*/*.{webp,avif,jpg,jpeg,png,svg}", {
+const files = import.meta.glob("../assets/photos/*/*.{webp,avif,jpg,jpeg,png,svg,WEBP,AVIF,JPG,JPEG,PNG,SVG}", {  // upper-case too: phones/cameras often save IMG_1234.JPG
   eager: true,
   query: "?url",
   import: "default",

@@ -29,7 +29,7 @@ export default function Gallery() {
   return (
     <Section id="gallery">
       <div className="wrap">
-        <SectionHeader id="gallery" index={10} label={copy.label} title={copy.title} kicker={<p>{copy.kicker}</p>} />
+        <SectionHeader id="gallery" index={9} label={copy.label} title={copy.title} kicker={<p>{copy.kicker}</p>} />
         {gallery.length === 0 ? (
           <EmptyState message={copy.empty} />
         ) : (
