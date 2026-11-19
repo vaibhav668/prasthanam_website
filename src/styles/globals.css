@@ -1,0 +1,476 @@
+@tailwind base;
+
+/* Metric-matched fallbacks: while the web fonts load, text is drawn in a local
+   font scaled to the same width/ascent/descent, so the swap causes ~no layout shift.
+   (Values measured from Unbounded 800 / Archivo 400 / JetBrains Mono 400.) */
+@font-face {
+  font-family: "Unbounded Fallback";
+  src: local("Arial Bold"), local("Arial-BoldMT"), local("Arial");
+  font-weight: 100 900;
+  size-adjust: 132%;
+  ascent-override: 75%;
+  descent-override: 18.2%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Archivo Fallback";
+  src: local("Arial"), local("ArialMT");
+  size-adjust: 98.3%;
+  ascent-override: 89.5%;
+  descent-override: 21.4%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "JetBrains Mono Fallback";
+  src: local("Courier New"), local("CourierNewPSMT");
+  size-adjust: 100%;
+  ascent-override: 102%;
+  descent-override: 30%;
+  line-gap-override: 0%;
+}
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------
+   TOKENS — change the palette here (see README "Change colours").
+------------------------------------------------------------------- */
+:root {
+  --ink: #0b0b0c;
+  --ink-2: #141416;
+  --paper: #ede8de;
+  --mute: #8d887f;
+  --red: #e10600;
+  --cyan: #00e5ff;
+  --line: rgba(237, 232, 222, 0.14);
+
+  /* Same colours as space-separated RGB channels, so Tailwind opacity
+     modifiers (bg-red/70, text-paper/80) work. Keep these in sync with the hex values. */
+  --ink-rgb: 11 11 12;
+  --ink-2-rgb: 20 20 22;
+  --paper-rgb: 237 232 222;
+  --mute-rgb: 141 136 127;
+  --red-rgb: 225 6 0;
+  --red-ui-rgb: 200 6 0;
+  --cyan-rgb: 0 229 255;
+
+  /* derived */
+  --red-text: #ff3b30; /* red tuned for AA (≥4.5:1) on --ink when used as small text */
+  --red-ui: #c80600; /* filled red surfaces carrying small paper text (≥4.5:1). --red stays the brand accent. */
+  --nav-h: 64px;
+  --gutter: clamp(16px, 4vw, 48px);
+  --safe-l: env(safe-area-inset-left, 0px);
+  --safe-r: env(safe-area-inset-right, 0px);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --safe-t: env(safe-area-inset-top, 0px);
+  color-scheme: dark;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    scroll-padding-top: var(--nav-h);
+  }
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: "Archivo", "Archivo Fallback", system-ui, sans-serif;
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+  ::selection {
+    background: var(--red);
+    color: var(--paper);
+  }
+  :focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: "Unbounded", "Unbounded Fallback", system-ui, sans-serif;
+    letter-spacing: -0.02em;
+  }
+  img {
+    max-width: 100%;
+  }
+  [tabindex="-1"]:focus {
+    outline: none;
+  }
+}
+
+/* ------------------------------------------------------------------
+   TYPE + LAYOUT HELPERS
+------------------------------------------------------------------- */
+@layer components {
+  .wrap {
+    width: 100%;
+    max-width: 1440px;
+    margin-inline: auto;
+    padding-left: calc(var(--gutter) + var(--safe-l));
+    padding-right: calc(var(--gutter) + var(--safe-r));
+  }
+  .mono {
+    font-family: "JetBrains Mono", "JetBrains Mono Fallback", ui-monospace, monospace;
+  }
+  .label {
+    font-family: "JetBrains Mono", "JetBrains Mono Fallback", ui-monospace, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mute);
+  }
+  .display-xl {
+    font-family: "Unbounded", "Unbounded Fallback", system-ui, sans-serif;
+    font-weight: 800;
+    font-size: var(--display-size, clamp(3.1rem, 15.5vw, 13.5rem));
+    line-height: 0.86;
+    letter-spacing: -0.045em;
+  }
+  .h2 {
+    font-family: "Unbounded", "Unbounded Fallback", system-ui, sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.75rem, 5.2vw, 4rem);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+  }
+  .h3 {
+    font-family: "Unbounded", "Unbounded Fallback", system-ui, sans-serif;
+    font-weight: 500;
+    font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+    line-height: 1.15;
+  }
+  .rule {
+    border-color: var(--line);
+  }
+
+  /* Static textures (no animation) */
+  .halftone {
+    background-image: radial-gradient(circle at center, rgba(237, 232, 222, 0.14) 1.1px, transparent 1.6px);
+    background-size: 9px 9px;
+  }
+  .halftone-red {
+    background-image: radial-gradient(circle at center, rgba(225, 6, 0, 0.55) 1.4px, transparent 2px);
+    background-size: 8px 8px;
+  }
+  .gridpaper {
+    background-image: linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  .scanlines {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.32) 0px,
+      rgba(0, 0, 0, 0.32) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  }
+
+  /* Tap target helper */
+  .tap {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* ------------------------------------------------------------------
+   SPIDER-SENSE — 200ms red/cyan chromatic jitter on hover/focus.
+   Element needs class .ss + data-text="<same text>".
+   Uses only transform + opacity on two pseudo copies.
+------------------------------------------------------------------- */
+.ss {
+  position: relative;
+  isolation: isolate;
+}
+.ss::before,
+.ss::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  display: inherit;
+  align-items: inherit;
+  justify-content: inherit;
+  padding: inherit;
+  pointer-events: none;
+  opacity: 0;
+  white-space: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+}
+.ss::before {
+  color: var(--red);
+  z-index: -1;
+}
+.ss::after {
+  color: var(--cyan);
+  z-index: -1;
+}
+@media (hover: hover) {
+  .ss:hover::before {
+    animation: ss-r 200ms steps(4) 1;
+  }
+  .ss:hover::after {
+    animation: ss-c 200ms steps(4) 1;
+  }
+}
+.ss:focus-visible::before {
+  animation: ss-r 200ms steps(4) 1;
+}
+.ss:focus-visible::after {
+  animation: ss-c 200ms steps(4) 1;
+}
+.ss:active::before {
+  animation: ss-r 200ms steps(4) 1;
+}
+.ss:active::after {
+  animation: ss-c 200ms steps(4) 1;
+}
+@keyframes ss-r {
+  0% { opacity: 0.9; transform: translate(-2px, 1px); }
+  25% { opacity: 0.9; transform: translate(2px, -1px); }
+  50% { opacity: 0.9; transform: translate(-1px, -1px); }
+  75% { opacity: 0.7; transform: translate(1px, 1px); }
+  100% { opacity: 0; transform: none; }
+}
+@keyframes ss-c {
+  0% { opacity: 0.9; transform: translate(2px, -1px); }
+  25% { opacity: 0.9; transform: translate(-2px, 1px); }
+  50% { opacity: 0.9; transform: translate(1px, 1px); }
+  75% { opacity: 0.7; transform: translate(-1px, -1px); }
+  100% { opacity: 0; transform: none; }
+}
+
+/* ------------------------------------------------------------------
+   MARQUEE
+------------------------------------------------------------------- */
+.marquee-track {
+  animation: marquee 28s linear infinite;
+  will-change: transform;
+}
+@keyframes marquee {
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+/* ------------------------------------------------------------------
+   SVG P-8 FALLBACK
+------------------------------------------------------------------- */
+.p8-swing {
+  transform-origin: 50% 0%;
+  animation: p8-swing 5.2s ease-in-out infinite;
+}
+@keyframes p8-swing {
+  0%, 100% { transform: rotate(-3.2deg); }
+  50% { transform: rotate(3.2deg); }
+}
+.p8-legs-l { transform-origin: 100% 50%; animation: p8-leg 2.6s ease-in-out infinite; }
+.p8-legs-r { transform-origin: 0% 50%; animation: p8-leg 2.6s ease-in-out infinite reverse; }
+@keyframes p8-leg {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(2.4deg); }
+}
+
+/* ------------------------------------------------------------------
+   GLITCH / TEAR (transform + opacity only)
+------------------------------------------------------------------- */
+.tear {
+  position: absolute;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  opacity: 0;
+  mix-blend-mode: screen;
+}
+.glitch-host:hover .tear,
+.glitch-host:focus-visible .tear,
+.glitch-host[data-glitch="on"] .tear {
+  animation: tear 320ms steps(5) 1;
+}
+.glitch-host:hover .tear:nth-child(2),
+.glitch-host[data-glitch="on"] .tear:nth-child(2) { animation-delay: 40ms; }
+.glitch-host:hover .tear:nth-child(3),
+.glitch-host[data-glitch="on"] .tear:nth-child(3) { animation-delay: 80ms; }
+@keyframes tear {
+  0% { opacity: 0.85; transform: translateX(-8%); }
+  20% { opacity: 0.85; transform: translateX(6%); }
+  40% { opacity: 0.6; transform: translateX(-3%); }
+  60% { opacity: 0.85; transform: translateX(4%); }
+  100% { opacity: 0; transform: none; }
+}
+.glitch-host:hover .tear-shift,
+.glitch-host[data-glitch="on"] .tear-shift {
+  animation: shift 260ms steps(3) 1;
+}
+@keyframes shift {
+  0% { transform: translateX(3px); }
+  33% { transform: translateX(-4px); }
+  66% { transform: translateX(2px); }
+  100% { transform: none; }
+}
+
+.flash-screen {
+  animation: flash 520ms steps(6) 1 forwards;
+}
+@keyframes flash {
+  0% { opacity: 1; transform: translateX(0); }
+  20% { opacity: 0.6; transform: translateX(-2%); }
+  40% { opacity: 1; transform: translateX(2%); }
+  70% { opacity: 0.4; transform: translateX(-1%); }
+  100% { opacity: 0; transform: none; }
+}
+
+/* ------------------------------------------------------------------
+   PROJECT VERSES
+------------------------------------------------------------------- */
+.verse-blueprint {
+  background-color: #0e3a63;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.12) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 60px 60px, 60px 60px, 12px 12px, 12px 12px;
+  color: #f4f8ff;
+}
+.verse-comic {
+  background-color: var(--paper);
+  color: var(--ink);
+}
+.verse-crt {
+  background-color: #031208;
+  color: #47ff8a;
+}
+.verse-crt .crt-glow {
+  text-shadow: 0 0 6px rgba(71, 255, 138, 0.55);
+}
+.verse-thermal {
+  background: radial-gradient(120% 90% at 65% 40%, #fff3a6 0%, #ffb300 16%, #ff5a00 32%, #c40018 52%, #4a0410 74%, #120306 100%);
+  color: #fff7e0;
+}
+
+/* ------------------------------------------------------------------
+   TEAM BADGES
+------------------------------------------------------------------- */
+.badge-scene {
+  perspective: 900px;
+}
+.badge-card {
+  transform-style: preserve-3d;
+  transition: transform 480ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  will-change: transform;
+}
+.badge-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.badge-back {
+  transform: rotateY(180deg);
+}
+.foil {
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    rgba(0, 229, 255, 0.16) 42%,
+    rgba(237, 232, 222, 0.28) 48%,
+    rgba(225, 6, 0, 0.16) 54%,
+    transparent 66%
+  );
+  background-size: 100% 100%;
+  will-change: transform;
+}
+
+/* ------------------------------------------------------------------
+   X-RAY MODE (feature flag) — whole site goes blueprint/wireframe.
+------------------------------------------------------------------- */
+html[data-xray="on"] body {
+  background-color: #0b2340;
+  background-image: linear-gradient(rgba(0, 229, 255, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, 0.12) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+html[data-xray="on"] main *,
+html[data-xray="on"] footer * {
+  background-color: transparent !important;
+  background-image: none !important;
+  color: #d8f9ff !important;
+  border-color: rgba(0, 229, 255, 0.5) !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+html[data-xray="on"] main *:not(svg *):not(canvas) {
+  outline: 1px dashed rgba(0, 229, 255, 0.28);
+  outline-offset: -1px;
+}
+html[data-xray="on"] main img {
+  opacity: 0.35;
+  filter: grayscale(1);
+}
+html[data-xray="on"] .grain-layer {
+  display: none;
+}
+
+/* ------------------------------------------------------------------
+   REDUCED MOTION — kill everything decorative.
+------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .marquee-track,
+  .p8-swing,
+  .p8-legs-l,
+  .p8-legs-r {
+    animation: none !important;
+  }
+}
+
+/* ------------------------------------------------------------------
+   TEAM ORBIT — web-shot on member switch (see sections/team/WebShotFx.tsx)
+------------------------------------------------------------------- */
+.tw-strand { animation: tw-strand 1300ms cubic-bezier(.2,.8,.2,1) both; }
+.tw-bead { opacity: 0; animation: tw-bead 1300ms ease-out both; }
+.tw-shock { opacity: 0; animation: tw-shock 1300ms ease-out both; }
+.tw-splat { opacity: 0; transform-origin: center; animation: tw-splat 1300ms cubic-bezier(.2,.8,.2,1) both; }
+@keyframes tw-strand {
+  0% { transform: scaleY(0); opacity: 1; }
+  18% { transform: scaleY(1.04); }
+  24% { transform: scaleY(1); }
+  /* reel: a little tug while the ring turns */
+  45% { transform: scaleY(0.97); }
+  70% { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(1); opacity: 0; }
+}
+@keyframes tw-bead {
+  0% { opacity: 0; transform: translateY(0); }
+  4% { opacity: 1; }
+  18% { opacity: 1; transform: translateY(var(--len)); }
+  22%, 100% { opacity: 0; transform: translateY(var(--len)); }
+}
+@keyframes tw-shock {
+  0%, 66% { opacity: 0; transform: scale(1); }
+  72% { opacity: 0.95; transform: scale(1.05); }
+  100% { opacity: 0; transform: scale(2); }
+}
+@keyframes tw-splat {
+  0%, 64% { opacity: 0; transform: scale(0.2) rotate(-20deg); }
+  72% { opacity: 1; transform: scale(1.12) rotate(0deg); }
+  80% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.02); }
+}
+.card-tear { opacity: 0; animation: tear 360ms steps(5) 1 both; }
