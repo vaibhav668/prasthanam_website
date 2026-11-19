@@ -1,3 +1,4 @@
 Put photos for team here.
 Name each file: the member id, e.g. member-01.webp (square, face centred)
 Full guide: ../README.md
+

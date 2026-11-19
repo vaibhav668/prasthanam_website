@@ -30,12 +30,12 @@ Object.entries(files)
   .sort(([a], [b]) => rank(a) - rank(b)) // prefer webp over png when both exist
   .forEach(([path, url]) => {
     const m = path.match(/photos\/([^/]+)\/(.+)\.[a-z]+$/i);
-    if (m && !index.has(`${m[1]}/${m[2]}`)) index.set(`${m[1]}/${m[2]}`, url);
+    if (m && !index.has(`${m[1]}/${m[2]}`.toLowerCase())) index.set(`${m[1]}/${m[2]}`.toLowerCase(), url);
   });
 
 /** URL of the photo for `<category>/<id>`, or undefined if no file was added. */
 export function photoUrl(category: PhotoCategory, id: string): string | undefined {
-  return index.get(`${category}/${id}`);
+  return index.get(`${category}/${id}`.toLowerCase());
 }
 
 /**
@@ -47,7 +47,7 @@ export function withPhotos<T extends { id: string }, K extends keyof T>(category
     const ids = new Set(items.map((i) => i.id));
     index.forEach((_, k) => {
       const [cat, id] = k.split("/");
-      if (cat === category && !ids.has(id)) {
+      if (cat === category && !ids.has(id) && ![...ids].some((i) => i.toLowerCase() === id)) {
         console.warn(`[photos] src/assets/photos/${cat}/${id}.* doesn't match any id in the ${cat} data. Known ids: ${[...ids].join(", ")}`);
       }
     });
