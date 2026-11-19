@@ -1,4 +1,5 @@
 import type { Event } from "../types/content";
+import { withPhotos } from "../lib/photos";
 
 /**
  * EVENTS — the web-thread timeline.
@@ -10,12 +11,13 @@ import type { Event } from "../types/content";
  * description   One or two sentences.
  * venue         Optional location.
  * registerLink  Optional URL. Shows a "Register" button on upcoming events.
- * image         Optional image path.
+ * image         Optional override. Normally leave it out: drop "<id>.webp" into
+ *               src/assets/photos/events/ (16:9 works best).
  * status        "upcoming" | "past" — decides which tab it appears in.
  *
  * ALL ENTRIES BELOW ARE SAMPLE PLACEHOLDERS.
  */
-export const events: Event[] = [
+const items: Event[] = [
   {
     id: "sample-orientation",
     title: "Sample: Fresher Orientation",
@@ -62,3 +64,6 @@ export const events: Event[] = [
     status: "past",
   },
 ];
+
+/** Photos are matched by id from src/assets/photos/events/ (see src/assets/photos/README.md). */
+export const events: Event[] = withPhotos("events", items, "image");

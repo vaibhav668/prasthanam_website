@@ -474,3 +474,22 @@ html[data-xray="on"] .grain-layer {
   100% { opacity: 0; transform: scale(1.02); }
 }
 .card-tear { opacity: 0; animation: tear 360ms steps(5) 1 both; }
+
+/* ------------------------------------------------------------------
+   ACHIEVEMENTS — 3D medal (sections/achievements/Medal3D.tsx)
+------------------------------------------------------------------- */
+.medal-float {
+  position: relative;
+  transform-style: preserve-3d;
+  animation: medal-float 4.5s ease-in-out infinite;
+}
+.medal-spin { transform: rotateY(-18deg); transition: transform 600ms ease-out; }
+.group:hover .medal-spin { animation: medal-spin 1.3s cubic-bezier(.3,.7,.25,1) 1; }
+@keyframes medal-spin {
+  from { transform: rotateY(-18deg); }
+  to { transform: rotateY(342deg); }
+}
+@keyframes medal-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}

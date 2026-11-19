@@ -60,7 +60,12 @@ export const sections = {
   },
   achievements: {
     label: "ACHIEVEMENTS",
-    title: "Trophy log.",
+    title: "Trophy cabinet.",
+    kicker: "Arena wins, podiums and awards. Hover a card to spin its medal.",
+    stats: { wins: "Wins", podiums: "Podiums", awards: "Total awards", years: "Years competing" },
+    featured: "Featured win",
+    all: "All years",
+    view: "View photo",
     empty: "Nothing logged yet. The first entry is yours to earn.",
   },
   reports: {

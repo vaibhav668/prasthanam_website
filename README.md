@@ -80,21 +80,30 @@ Add a member (`src/data/team.ts`):
 
 ## 2. Adding photos
 
-Put files in `public/images/…` and reference them as `/images/…`.
+Photos for team members, projects, achievements, events/workshops and alumni live in one
+structured library: **`src/assets/photos/<section>/<id>.webp`**. The file name is the item's
+`id`, so you never edit a data file just to add a photo.
 
-| Kind | Folder | Recommended |
-|---|---|---|
-| Team | `public/images/team/` | Square, ≥ 400×400, WebP/AVIF, face centred (shown in circles) |
-| Projects | `public/images/projects/` | 16:11, ~1280 px wide, WebP/AVIF |
-| Gallery | `public/images/gallery/` | Any ratio, ~1600 px long edge, WebP/AVIF |
-| Sponsors | `public/images/sponsors/` | SVG or transparent PNG, light/monochrome |
+```
+src/assets/photos/
+├── projects/       sample-line-follower.webp
+├── achievements/   robowars-national-2025.webp
+├── events/         sample-arduino-101.webp      (events and workshops)
+├── team/           member-01.webp
+└── alumni/         alum-1.webp
+```
 
-Convert to WebP: `cwebp -q 78 in.jpg -o out.webp` (or squoosh.app).
+See [`src/assets/photos/README.md`](src/assets/photos/README.md) for sizes and details.
+A typo in a file name prints a dev-console warning listing the valid ids. Setting `image:` /
+`photo:` in a data file overrides the library (for external URLs or `/public` files).
+Gallery photos and sponsor logos stay in `public/images/gallery/` and `public/images/sponsors/`
+because they're listed one by one with alt text.
+
+Convert to WebP: `cwebp -q 78 in.jpg -o out.webp` (or squoosh.app). Keep files under ~200 KB.
 For responsive gallery images, export two sizes and set
 `srcSet: "/images/gallery/lab-640.webp 640w, /images/gallery/lab-1280.webp 1280w"`.
 Always set `width` and `height` on gallery items to reserve space and prevent layout shift.
 
-The current gallery and sponsor images are placeholder SVGs marked **SAMPLE / REPLACE ME**.
 **Logo:** the navbar/footer logo is `public/images/logo-64.png` and `logo-128.png` (paths set in
 `site.logo`), a transparent paper-coloured version of the original artwork. The browser tab icon is
 `public/favicon.png` and `public/apple-touch-icon.png`. To change the logo, replace those files and

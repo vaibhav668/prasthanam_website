@@ -54,13 +54,28 @@ export interface Event {
   status: "upcoming" | "past";
 }
 
+export type Medal = "gold" | "silver" | "bronze" | "special";
+
 export interface Achievement {
   id: string;
   title: string;
   event: string;
   year: number;
+  /** Badge text, e.g. "1st Place", "Runner-up", "Finalist" */
   position?: string;
+  /** Photo of the win (team, trophy, bot). 16:10 looks best. */
   image?: string;
+  /** Small label above the title, e.g. "Combat Robotics (15kg category)" */
+  category?: string;
+  description?: string;
+  /** Footer line with a trophy icon, e.g. "National Champion" */
+  highlight?: string;
+  /** 3D medal colour. Defaults from `position` (1st → gold, 2nd → silver, 3rd → bronze, else special). */
+  medal?: Medal;
+  /** Shown big at the top of the section. */
+  featured?: boolean;
+  /** Optional link (news article, certificate, video). */
+  link?: { label: string; url: string };
 }
 
 export interface GalleryItem {

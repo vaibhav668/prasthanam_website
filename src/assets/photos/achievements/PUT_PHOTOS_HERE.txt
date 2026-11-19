@@ -1,0 +1,3 @@
+Put photos for achievements here.
+Name each file: the achievement id, e.g. robowars-national-2025.webp
+Full guide: ../README.md

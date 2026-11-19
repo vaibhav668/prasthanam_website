@@ -1,4 +1,5 @@
 import type { Member } from "../types/content";
+import { withPhotos } from "../lib/photos";
 
 /**
  * TEAM
@@ -9,17 +10,18 @@ import type { Member } from "../types/content";
  * branch    e.g. "CSE", "ECE", "ME", "EE", "CE", "BT".
  * year      e.g. "3rd Year" or "Faculty".
  * tier      "faculty" | "core" | "lead" | "member" — controls grouping + badge style.
- * photo     Optional. "/images/team/<id>.webp" (square, ≥ 400×400). Initials shown if missing.
+ * photo     Optional override. Normally leave it out: drop "<id>.webp" into
+ *            src/assets/photos/team/ (square, ≥ 400×400). Initials shown if missing.
  * skills    Shown on the back of the badge.
  * socials   Optional profile URLs.
  *
  * ALL ENTRIES BELOW ARE SAMPLE PLACEHOLDERS — never put real names here without consent.
  */
-export const team: Member[] = [
+const items: Member[] = [
   {
     id: "faculty-01",
-    name: "Faculty Coordinator",
-    role: "Faculty Advisor",
+    name: "soumyata",
+    role: "member",
     branch: "Dept. TBA",
     year: "Faculty",
     tier: "faculty",
@@ -102,3 +104,6 @@ export const team: Member[] = [
     skills: ["Curiosity"],
   },
 ];
+
+/** Photos are matched by id from src/assets/photos/team/ (see src/assets/photos/README.md). */
+export const team: Member[] = withPhotos("team", items, "photo");

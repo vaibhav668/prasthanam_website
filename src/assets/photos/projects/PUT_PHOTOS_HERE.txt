@@ -1,0 +1,3 @@
+Put photos for projects here.
+Name each file: the project id, e.g. sample-line-follower.webp
+Full guide: ../README.md

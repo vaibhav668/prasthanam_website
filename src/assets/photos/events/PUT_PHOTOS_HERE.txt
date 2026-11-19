@@ -1,0 +1,3 @@
+Put photos for events here.
+Name each file: the event id, e.g. sample-arduino-101.webp (events and workshops share this folder)
+Full guide: ../README.md

@@ -1,4 +1,5 @@
 import type { Project } from "../types/content";
+import { withPhotos } from "../lib/photos";
 
 /**
  * PROJECTS — "Multiverse of Builds".
@@ -12,13 +13,14 @@ import type { Project } from "../types/content";
  * verse        Card art style: "blueprint" | "comic" | "crt" | "thermal".
  * tech         Tech tags (also used by the filter).
  * specs        Label/value pairs shown as a spec sheet.
- * image        Optional. Path under /public, e.g. "/images/projects/rover.webp".
+ * image        Optional override. Normally leave it out: drop "<id>.webp" into
+ *              src/assets/photos/projects/ and it is picked up automatically.
  * github/video Optional links.
  * team         Optional member ids from data/team.ts.
  *
  * ALL ENTRIES BELOW ARE SAMPLE PLACEHOLDERS.
  */
-export const projects: Project[] = [
+const items: Project[] = [
   {
     id: "sample-line-follower",
     title: "Sample Line Follower",
@@ -116,3 +118,6 @@ export const projects: Project[] = [
     ],
   },
 ];
+
+/** Photos are matched by id from src/assets/photos/projects/ (see src/assets/photos/README.md). */
+export const projects: Project[] = withPhotos("projects", items, "image");

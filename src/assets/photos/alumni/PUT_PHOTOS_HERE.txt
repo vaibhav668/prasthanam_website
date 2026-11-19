@@ -1,0 +1,3 @@
+Put photos for alumni here.
+Name each file: the alumnus id, e.g. alum-1.webp (square)
+Full guide: ../README.md

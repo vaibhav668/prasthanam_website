@@ -103,7 +103,19 @@ export default function Events() {
                         <div className="relative z-10 pt-5 md:order-2">
                           <Knot upcoming={ev.status === "upcoming"} />
                         </div>
-                        <article className={`border border-line bg-ink-2 p-5 sm:p-6 ${right ? "md:order-3" : "md:order-1"}`}>
+                        <article className={`overflow-hidden border border-line bg-ink-2 ${right ? "md:order-3" : "md:order-1"}`}>
+                          {ev.image && (
+                            <img
+                              src={ev.image}
+                              alt={ev.title}
+                              loading="lazy"
+                              decoding="async"
+                              width={800}
+                              height={450}
+                              className="aspect-video w-full border-b border-line object-cover"
+                            />
+                          )}
+                          <div className="p-5 sm:p-6">
                           <div className="flex items-start justify-between gap-4">
                             <div className="flex items-baseline gap-3">
                               <span className="font-display text-4xl font-extrabold leading-none tracking-[-0.04em]">{d.day}</span>
@@ -121,6 +133,7 @@ export default function Events() {
                               </Button>
                             </div>
                           )}
+                          </div>
                         </article>
                       </li>
                     );
