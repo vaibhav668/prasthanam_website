@@ -11,7 +11,7 @@ export default function Sponsors() {
   return (
     <Section id="sponsors" className="border-t border-line">
       <div className="wrap">
-        <SectionHeader id="sponsors" index={11} label={copy.label} title={copy.title} />
+        <SectionHeader id="sponsors" index={10} label={copy.label} title={copy.title} />
         {sponsors.length === 0 ? (
           <EmptyState message={copy.empty}>
             <Button href={`mailto:${site.email}`} variant="ghost" external={false}>

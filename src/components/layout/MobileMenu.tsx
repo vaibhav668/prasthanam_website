@@ -46,7 +46,7 @@ export function MobileMenu({ open, onClose, xray, onXray }: Props) {
     };
   }, [open, onClose]);
 
-  const links = [...site.navLinks, { id: "join", label: "Join" }];
+  const links = site.navLinks;
 
   return (
     <AnimatePresence>
@@ -87,7 +87,7 @@ export function MobileMenu({ open, onClose, xray, onXray }: Props) {
                     className="flex items-baseline gap-4 py-4 text-paper active:text-red"
                   >
                     <span className="mono w-7 text-xs text-mute">{String(i + 1).padStart(2, "0")}</span>
-                    <span className={`font-display text-[clamp(1.6rem,8vw,3rem)] font-extrabold uppercase leading-none tracking-[-0.03em] ${l.id === "join" ? "text-red" : ""}`}>
+                    <span className={`font-display text-[clamp(1.6rem,8vw,3rem)] font-extrabold uppercase leading-none tracking-[-0.03em]`}>
                       {l.label}
                     </span>
                   </a>

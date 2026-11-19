@@ -6,12 +6,6 @@
  * institute          Full institute name + address lines (footer).
  * email              Contact email. Shown as plain text AND as a mailto link.
  * socials            Leave a value as "" to hide that icon.
- * form.endpoint      Where the Join form POSTs to (JSON). Works with Formspree
- *                    ("https://formspree.io/f/xxxxxxx"). Leave "" to run in demo
- *                    mode (no network request, success state still shows).
- * form.mode          "json" (Formspree, Getform, any JSON endpoint) or
- *                    "google-form" (posts as form-data with no-cors; set
- *                    form.googleFieldMap to your entry.XXXX ids).
  * logo               Club logo files in /public/images (small = navbar, large = footer/intro).
  * features           Feature flags. Turn things off without touching components.
  * navLinks           Section anchors in the navbar. `id` must match a section id.
@@ -34,18 +28,6 @@ export const site = {
     github: "https://github.com/", // SAMPLE
     youtube: "",
   },
-  form: {
-    endpoint: "", // e.g. "https://formspree.io/f/abcdwxyz"
-    mode: "json" as "json" | "google-form",
-    // Only for mode "google-form": map our field names → your Google Form entry ids.
-    googleFieldMap: {
-      name: "entry.0000000001",
-      branch: "entry.0000000002",
-      year: "entry.0000000003",
-      interest: "entry.0000000004",
-      why: "entry.0000000005",
-    } as Record<string, string>,
-  },
   logo: { small: "/images/logo-64.png", large: "/images/logo-128.png" },
   features: {
     threeHero: true, // false → always use the SVG P-8 (no WebGL at all)
@@ -62,7 +44,6 @@ export const site = {
     { id: "team", label: "Members" },
     { id: "events", label: "Events & Workshops" },
     { id: "achievements", label: "Achievements" },
-    { id: "reports", label: "Reports" },
     { id: "updates", label: "Updates" },
     { id: "alumni", label: "Alumni" },
   ],

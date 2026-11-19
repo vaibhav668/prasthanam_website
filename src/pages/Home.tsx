@@ -11,13 +11,11 @@ const loaders = [
   () => import("../sections/Team"),
   () => import("../sections/Events"),
   () => import("../sections/Achievements"),
-  () => import("../sections/Reports"),
   () => import("../sections/Updates"),
   () => import("../sections/Alumni"),
   () => import("../sections/Gallery"),
   () => import("../sections/Sponsors"),
   () => import("../sections/FAQ"),
-  () => import("../sections/Join"),
 ];
 const SECTIONS: LazyExoticComponent<ComponentType>[] = loaders.map((l) => lazy(l));
 

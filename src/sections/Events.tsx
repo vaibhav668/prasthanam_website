@@ -8,6 +8,7 @@ import { SectionHeader } from "../components/layout/SectionHeader";
 import { Button } from "../components/ui/Button";
 import { Badge } from "../components/ui/Badge";
 import { EmptyState } from "../components/ui/EmptyState";
+import { ReportModal } from "./events/ReportModal";
 
 type Tab = "upcoming" | "past";
 const TABS: Tab[] = ["upcoming", "past"];
@@ -43,6 +44,7 @@ export default function Events() {
   const copy = sections.events;
   const [tab, setTab] = useState<Tab>(events.some((e) => e.status === "upcoming") ? "upcoming" : "past");
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const [reportFor, setReportFor] = useState<Event | null>(null);
   const list = events
     .filter((e) => e.status === tab)
     .sort((a, b) => (tab === "upcoming" ? sortKey(a) - sortKey(b) : sortKey(b) - sortKey(a)));
@@ -126,11 +128,24 @@ export default function Events() {
                           <h3 className="h3 mt-4">{ev.title}</h3>
                           <p className="mt-2 text-sm leading-relaxed text-paper/80">{ev.description}</p>
                           {ev.venue && <p className="mono mt-3 text-xs uppercase tracking-[0.08em] text-mute">@ {ev.venue}</p>}
-                          {ev.status === "upcoming" && ev.registerLink && (
-                            <div className="mt-5">
-                              <Button href={ev.registerLink} variant="primary" icon="→">
-                                {copy.register}
-                              </Button>
+                          {((ev.status === "upcoming" && ev.registerLink) || ev.report) && (
+                            <div className="mt-5 flex flex-wrap items-center gap-3">
+                              {ev.status === "upcoming" && ev.registerLink && (
+                                <Button href={ev.registerLink} variant="primary" icon="→">
+                                  {copy.register}
+                                </Button>
+                              )}
+                              {ev.report && (
+                                <button
+                                  type="button"
+                                  onClick={() => setReportFor(ev)}
+                                  aria-haspopup="dialog"
+                                  className="ss tap mono inline-flex items-center gap-2 border border-line px-3 text-[11px] uppercase tracking-[0.1em] text-paper/85 hover:border-cyan hover:text-cyan"
+                                  data-text={`▤ ${copy.report}`}
+                                >
+                                  <span aria-hidden>▤</span> {copy.report}
+                                </button>
+                              )}
                             </div>
                           )}
                           </div>
@@ -144,6 +159,7 @@ export default function Events() {
           )}
         </div>
       </div>
+      <ReportModal event={reportFor} onClose={() => setReportFor(null)} />
     </Section>
   );
 }

@@ -31,7 +31,7 @@ export function scrollToId(id: string, tries = 40) {
   el.focus({ preventScroll: true });
 }
 
-/** Click handler for in-page links ("#join"). External links pass through. */
+/** Click handler for in-page links ("#projects"). External links pass through. */
 export function handleAnchorClick(e: React.MouseEvent, href: string, after?: () => void) {
   if (!href.startsWith("#")) return;
   e.preventDefault();

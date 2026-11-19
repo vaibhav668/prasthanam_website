@@ -4,7 +4,7 @@ import { terminalCommands } from "../../data/terminal";
 import { projects } from "../../data/projects";
 import { team } from "../../data/team";
 import { site } from "../../config/site";
-import { getLenis, scrollToId } from "../../lib/scroll";
+import { getLenis } from "../../lib/scroll";
 import { on } from "../../lib/ui-events";
 
 type Line = { kind: "in" | "out" | "err"; text: string };
@@ -98,18 +98,14 @@ export function Terminal() {
         if (!team.length) out.push({ kind: "out", text: "  (no agents yet)" });
         team.forEach((p) => out.push({ kind: "out", text: `  [${p.tier.padEnd(7)}] ${p.name} — ${p.role}` }));
         break;
-      case "scrollToJoin":
-        out.push({ kind: "out", text: "access request queued. opening /join …" });
-        setLines((l) => [...l, echo, ...out]);
-        setTimeout(() => {
-          opener.current = null;
-          close();
-          setTimeout(() => {
-            scrollToId("join");
-            setTimeout(() => document.querySelector<HTMLInputElement>("#join input")?.focus({ preventScroll: true }), 900);
-          }, 120);
-        }, 450);
-        return;
+      case "contact": {
+        out.push({ kind: "out", text: "access request: send us a message." });
+        out.push({ kind: "out", text: `  email      ${site.email}` });
+        Object.entries(site.socials)
+          .filter(([, url]) => url)
+          .forEach(([k, url]) => out.push({ kind: "out", text: `  ${k.padEnd(10)} ${url}` }));
+        break;
+      }
     }
     setLines((l) => [...l, echo, ...out]);
   };

@@ -14,7 +14,7 @@ export default function Alumni() {
     <Section id="alumni" className="border-t border-line">
       <div aria-hidden className="halftone pointer-events-none absolute left-0 top-0 h-72 w-72 opacity-40 [mask-image:radial-gradient(closest-side,black,transparent)]" />
       <div className="wrap relative">
-        <SectionHeader id="alumni" index={9} label={copy.label} title={copy.title} kicker={<p>{copy.kicker}</p>} />
+        <SectionHeader id="alumni" index={8} label={copy.label} title={copy.title} kicker={<p>{copy.kicker}</p>} />
 
         {alumni.length === 0 ? (
           <EmptyState message={copy.empty} />

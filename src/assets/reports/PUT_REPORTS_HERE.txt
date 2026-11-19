@@ -1,0 +1,3 @@
+Put report PDFs here.
+Name each file after the event/workshop id, e.g. sample-techfest.pdf
+(ids are in src/data/events.ts). The event then shows a "Report" button.
