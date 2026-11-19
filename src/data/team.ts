@@ -39,7 +39,7 @@ const items: Member[] = [
   },
   {
     id: "member-02",
-    name: "Member Name",
+    name: "Aadarsh",
     role: "Vice President",
     branch: "ME",
     year: "4th Year",
