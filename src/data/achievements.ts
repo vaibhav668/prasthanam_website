@@ -26,7 +26,7 @@ import { withPhotos } from "../lib/photos";
 const items: Achievement[] = [
   {
     id: "ACH001",
-    title: "3RD POSITION - NANO NAVIGATOR EVENT",
+    title: "NANO NAVIGATOR EVENT",
     event: "COGNIZANCE,IIT ROORKEE",
     year: 2026,
     position: "3rd Place",
@@ -48,10 +48,10 @@ const items: Achievement[] = [
   },
   {
       id: "ACH0011",
-      title: "2ND RUNNER UP - RC RACING",
+      title: "RC RACING",
       event: "GRAFEST, DEHRADUN",
       year: 2025,
-      position: "2nd place",
+      position: "3rd place",
       category: "RADIO CONTROL (RC) RACING",
       description: "High-Performance  custom RC race car engineered for maximum agility, high-speed acceleration, and precision track handeling, securing 2nd runner up.",
     },
@@ -111,7 +111,7 @@ const items: Achievement[] = [
   },
 {
     id: "ACH009",
-    title: "2ND POSITION - ROBO SOCCER EVENT",
+    title: "ROBO SOCCER EVENT",
     event: "TRYST, IIT DELHI",
     year: 2025,
     position: "2nd Place",
@@ -120,7 +120,7 @@ const items: Achievement[] = [
   },
 {
     id: "ACH0010",
-    title: "2ND POSITION - BLIND BOT EVENT",
+    title: "BLIND BOT EVENT",
     event: "TRYST, IIT DELHI",
     year: 2025,
     position: "2nd Place",
