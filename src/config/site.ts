@@ -29,6 +29,7 @@ export const site = {
     youtube: "",
   },
   logo: { small: "/images/logo-64.png", large: "/images/logo-128.png" },
+  collegeLogo: "/images/gbpiet-logo.png", // college crest, shown at both ends of the navbar
   features: {
     threeHero: true, // false → always use the SVG P-8 (no WebGL at all)
     bootIntro: true, // first-visit assembly intro
@@ -44,7 +45,6 @@ export const site = {
     { id: "team", label: "Members" },
     { id: "events", label: "Events & Workshops" },
     { id: "achievements", label: "Achievements" },
-    { id: "updates", label: "Updates" },
     { id: "alumni", label: "Alumni" },
   ],
 };

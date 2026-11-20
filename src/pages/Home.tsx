@@ -11,7 +11,6 @@ const loaders = [
   () => import("../sections/Team"),
   () => import("../sections/Events"),
   () => import("../sections/Achievements"),
-  () => import("../sections/Updates"),
   () => import("../sections/Alumni"),
   () => import("../sections/Gallery"),
   () => import("../sections/Sponsors"),

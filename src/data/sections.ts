@@ -71,17 +71,6 @@ export const sections = {
     view: "View photo",
     empty: "Nothing logged yet. The first entry is yours to earn.",
   },
-  updates: {
-    label: "UPDATES",
-    title: "Transmission log.",
-    kicker: "News, results and announcements from the lab.",
-    tags: { announcement: "Announcement", recruitment: "Recruitment", result: "Result", general: "General" },
-    pinned: "Pinned",
-    showAll: "Show all updates",
-    showLess: "Show fewer",
-    initial: 4,
-    empty: "No transmissions yet. Watch this frequency.",
-  },
   alumni: {
     label: "ALUMNI",
     title: "Threads that went further.",
@@ -92,7 +81,7 @@ export const sections = {
   },
   gallery: {
     label: "GALLERY",
-    title: "Lab footage.",
+    title: "Life at Prasthanam.",
     kicker: "Solder smoke, arena dust, 3 a.m. debugging.",
     empty: "No photos yet.",
     annotation: "sample — swap me",

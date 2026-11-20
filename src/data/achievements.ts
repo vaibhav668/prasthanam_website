@@ -135,7 +135,6 @@ const items: Achievement[] = [
     year: 2026,
     // position: "2nd place",
     category: "HACKTHON",
-    featured: true,
     description: "MOST INNOVATING IDEA CATEOGRY WINNER",
   }
 ,{

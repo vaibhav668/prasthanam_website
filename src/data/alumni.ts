@@ -17,10 +17,10 @@ import { withPhotos } from "../lib/photos";
  * ALL ENTRIES BELOW ARE SAMPLE PLACEHOLDERS.
  */
 const items: Alumnus[] = [
-  { id: "alum-1", name: "Alumni Name", batch: "2021–2025", branch: "ECE", clubRole: "Former President", now: "Current role TBA" },
-  { id: "alum-2", name: "Alumni Name", batch: "2021–2025", branch: "ME", clubRole: "Former Mechanical Lead", now: "Current role TBA" },
-  { id: "alum-3", name: "Alumni Name", batch: "2020–2024", branch: "CSE", clubRole: "Former Vision Lead", now: "Current role TBA" },
-  { id: "alum-4", name: "Alumni Name", batch: "2020–2024", branch: "EE", clubRole: "Founding Member", now: "Current role TBA" },
+  { id: "alum-1", name: "Ashmit Rana ", batch: "2021–2025", branch: "EE" },
+  { id: "alum-2", name: "Harsh Singh", batch: "2021–2025", branch: "EE", },
+  { id: "alum-3", name: "Arvind Singh Rawat", batch: "2020–2024", branch: "EE"},
+  { id: "alum-4", name: "Gyanendra Yadav", batch: "2020–2024", branch: "EE"},
 ];
 
 /** Photos are matched by id from src/assets/photos/alumni/ (see src/assets/photos/README.md). */

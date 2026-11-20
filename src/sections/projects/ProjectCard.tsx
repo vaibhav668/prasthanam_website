@@ -42,7 +42,7 @@ export function ProjectCard({ project, index, onOpen }: { project: Project; inde
 
         <div className="relative aspect-video w-full overflow-hidden">
           {project.image ? (
-            <img src={project.image} alt="" loading="lazy" decoding="async" width={640} height={360} className="h-full w-full object-cover" />
+            <img src={project.image} alt="" loading="lazy" decoding="async" width={640} height={360} className="h-full w-full object-cover" style={project.imagePosition ? { objectPosition: project.imagePosition } : undefined} />
           ) : (
             <ProjectArt project={project} />
           )}

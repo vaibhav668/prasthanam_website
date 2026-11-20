@@ -12,7 +12,7 @@ export default function FAQ() {
   return (
     <Section id="faq">
       <div className="wrap">
-        <SectionHeader id="faq" index={11} label={copy.label} title={copy.title} />
+        <SectionHeader id="faq" index={10} label={copy.label} title={copy.title} />
         {faq.length === 0 ? (
           <EmptyState message={copy.empty} />
         ) : (

@@ -19,6 +19,8 @@ export interface Project {
   tech: string[];
   specs: { label: string; value: string }[];
   image?: string;
+  /** CSS object-position for the card crop, e.g. "50% 90%" to show more of the bottom. Default: centred. */
+  imagePosition?: string;
   github?: string;
   video?: string;
   /** Member ids from data/team.ts */

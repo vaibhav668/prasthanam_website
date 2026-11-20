@@ -104,6 +104,7 @@ export function Navbar() {
               </span>
               <span>Menu</span>
             </button>
+            <img src={site.collegeLogo} alt="GB Pant Institute of Engineering and Technology" width={44} height={52} decoding="async" className="ml-2 block h-[52px] w-auto shrink-0 select-none" draggable={false} />
           </div>
         </nav>
       </header>

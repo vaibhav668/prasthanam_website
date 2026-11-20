@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
-<defs><pattern id="d" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="7" cy="7" r="1.95" fill="#EDE8DE" opacity=".09"/></pattern>
-<pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#EDE8DE" stroke-opacity=".06"/></pattern></defs>
-<rect width="100%" height="100%" fill="#141416"/><rect width="100%" height="100%" fill="url(#g)"/><rect width="100%" height="100%" fill="url(#d)"/>
-<circle cx="496.0" cy="336.0" r="176.0" fill="none" stroke="#E10600" stroke-width="3" stroke-dasharray="6 8"/>
-<path d="M160.0 640.0 L400.0 400.0 L640.0 600.0" fill="none" stroke="#EDE8DE" stroke-opacity=".25" stroke-width="2"/>
-<text x="32" y="56" font-family="monospace" font-size="22" fill="#8D887F">[ SAMPLE PHOTO / 03 ]</text>
-<text x="32" y="760" font-family="monospace" font-size="30" font-weight="bold" fill="#EDE8DE">ARENA DAY</text>
-<text x="768" y="760" text-anchor="end" font-family="monospace" font-size="18" fill="#E10600">REPLACE ME</text></svg>
