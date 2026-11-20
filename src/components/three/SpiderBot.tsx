@@ -20,6 +20,10 @@ const M = {
   glint: new THREE.MeshBasicMaterial({ color: "#ffffff" }),
 };
 
+/** The lens material — HeroScene pulses its glow when P-8 fires. */
+export const P8_LENS = M.lens;
+export const P8_LENS_GLOW = M.lens.emissiveIntensity;
+
 const G = {
   hex: new THREE.CylinderGeometry(0.62, 0.62, 0.36, 6),
   hexRim: new THREE.CylinderGeometry(0.66, 0.66, 0.06, 6),

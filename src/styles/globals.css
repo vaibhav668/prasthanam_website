@@ -281,6 +281,20 @@
   0%, 100% { transform: rotate(0deg); }
   50% { transform: rotate(2.4deg); }
 }
+/* blink: a quick squint near the end of each cycle (two cycles offset → irregular feel) */
+.p8-blink { transform-box: fill-box; transform-origin: center; animation: p8-blink 5.3s ease-in-out infinite; }
+@keyframes p8-blink {
+  0%, 93%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.12); }
+  97% { transform: scaleY(1); }
+}
+/* recoil when it fires a web (class re-added on every shot) */
+.p8-recoil { animation: p8-recoil 420ms cubic-bezier(.2,.8,.2,1); }
+@keyframes p8-recoil {
+  0% { transform: none; filter: none; }
+  22% { transform: translateY(-12px) scale(0.93); filter: brightness(1.45) saturate(1.3); }
+  100% { transform: none; filter: none; }
+}
 
 /* ------------------------------------------------------------------
    GLITCH / TEAR (transform + opacity only)
@@ -435,7 +449,9 @@ html[data-xray="on"] .grain-layer {
   .marquee-track,
   .p8-swing,
   .p8-legs-l,
-  .p8-legs-r {
+  .p8-legs-r,
+  .p8-blink,
+  .p8-recoil {
     animation: none !important;
   }
 }
@@ -484,7 +500,7 @@ html[data-xray="on"] .grain-layer {
   animation: medal-float 4.5s ease-in-out infinite;
 }
 .medal-spin { transform: rotateY(-18deg); transition: transform 600ms ease-out; }
-.group:hover .medal-spin { animation: medal-spin 1.3s cubic-bezier(.3,.7,.25,1) 1; }
+.group:hover .medal-spin { animation: medal-spin 2.4s cubic-bezier(.35,.6,.3,1) 1; }
 @keyframes medal-spin {
   from { transform: rotateY(-18deg); }
   to { transform: rotateY(342deg); }

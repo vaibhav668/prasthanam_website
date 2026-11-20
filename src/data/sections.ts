@@ -19,7 +19,6 @@ export const sections = {
   about: {
     label: "ABOUT",
     focusLabel: "Focus areas",
-    statsNote: "sample numbers — update in data/about.ts",
   },
   projects: {
     label: "PROJECTS",
@@ -50,7 +49,6 @@ export const sections = {
   events: {
     label: "EVENTS & WORKSHOPS",
     title: "Threads in time.",
-    tabs: { upcoming: "Upcoming", past: "Past" },
     register: "Register",
     report: "Report",
     reportTitle: "Event report",
@@ -59,13 +57,12 @@ export const sections = {
     pages: "pages",
     noFile: "Full PDF coming soon.",
     tba: "Date TBA",
-    empty: { upcoming: "Nothing scheduled yet. Watch this thread.", past: "No past events logged yet." },
+    empty: "No events logged yet. Watch this thread.",
   },
   achievements: {
     label: "ACHIEVEMENTS",
     title: "Trophy cabinet.",
     kicker: "Arena wins, podiums and awards. Hover a card to spin its medal.",
-    stats: { wins: "Wins", podiums: "Podiums", awards: "Total awards", years: "Years competing" },
     featured: "Featured win",
     all: "All years",
     view: "View photo",
@@ -87,17 +84,6 @@ export const sections = {
     annotation: "sample — swap me",
     prev: "Previous",
     next: "Next",
-  },
-  sponsors: {
-    label: "SPONSORS",
-    title: "Holding the web up.",
-    empty: "Your logo could hang here.",
-    cta: "Sponsor the club",
-  },
-  faq: {
-    label: "FAQ",
-    title: "Questions, answered.",
-    empty: "No questions yet. Ask us.",
   },
   notFound: {
     code: "ERR 404",

@@ -6,11 +6,9 @@ import type { Achievement } from "../types/content";
 import { Section } from "../components/layout/Section";
 import { SectionHeader } from "../components/layout/SectionHeader";
 import { EmptyState } from "../components/ui/EmptyState";
-import { Counter } from "../components/ui/Counter";
 import { Tag } from "../components/ui/Tag";
 import { Modal } from "../components/ui/Modal";
 import { AchievementCard } from "./achievements/AchievementCard";
-import { medalOf } from "./achievements/medal";
 import { useReducedMotion } from "../hooks/useReducedMotion";
 
 export default function Achievements() {
@@ -21,15 +19,6 @@ export default function Achievements() {
 
   const sorted = useMemo(() => [...achievements].sort((a, b) => b.year - a.year), []);
   const years = useMemo(() => Array.from(new Set(sorted.map((a) => a.year))), [sorted]);
-  const stats = useMemo(() => {
-    const medals = achievements.map(medalOf);
-    return [
-      { label: copy.stats.wins, value: medals.filter((x) => x === "gold").length },
-      { label: copy.stats.podiums, value: medals.filter((x) => x !== "special").length },
-      { label: copy.stats.awards, value: achievements.length },
-      { label: copy.stats.years, value: years.length },
-    ];
-  }, [copy.stats, years.length]);
 
   const featured = sorted.filter((a) => a.featured && (!year || a.year === year));
   const rest = sorted.filter((a) => !a.featured && (!year || a.year === year));
@@ -44,18 +33,6 @@ export default function Achievements() {
           <EmptyState message={copy.empty} />
         ) : (
           <>
-            {/* stats strip */}
-            <dl className="mb-12 grid grid-cols-2 border-l border-t border-line sm:grid-cols-4">
-              {stats.map((s) => (
-                <div key={s.label} className="border-b border-r border-line p-4 sm:p-5">
-                  <dd className="font-display text-[clamp(2rem,5vw,3.2rem)] font-extrabold leading-none tracking-[-0.04em]">
-                    <Counter value={s.value} />
-                  </dd>
-                  <dt className="label mt-2 normal-case tracking-normal">{s.label}</dt>
-                </div>
-              ))}
-            </dl>
-
             {years.length > 1 && (
               <div className="mb-10 flex flex-wrap gap-2" role="group" aria-label={copy.all}>
                 <Tag active={!year} onClick={() => setYear(null)}>{copy.all}</Tag>

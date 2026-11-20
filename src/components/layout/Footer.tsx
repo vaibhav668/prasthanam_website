@@ -1,8 +1,39 @@
+import { useEffect, useRef } from "react";
 import { site } from "../../config/site";
 import { handleAnchorClick } from "../../lib/scroll";
 import { LogoMark } from "./Logo";
 
 const SOCIAL_LABELS: Record<string, string> = { instagram: "Instagram", linkedin: "LinkedIn", github: "GitHub", youtube: "YouTube" };
+
+/** Big wordmark that always scales to exactly fill its container's width (never clipped). */
+function FitWordmark({ text }: { text: string }) {
+  const box = useRef<HTMLDivElement>(null);
+  const word = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const b = box.current;
+    const w = word.current;
+    if (!b || !w) return;
+    const fit = () => {
+      w.style.fontSize = "100px";
+      const natural = w.getBoundingClientRect().width;
+      if (natural > 0) w.style.fontSize = `${(100 * b.clientWidth) / natural}px`;
+    };
+    fit();
+    const ro = new ResizeObserver(fit);
+    ro.observe(b);
+    document.fonts?.ready.then(fit);
+    return () => ro.disconnect();
+  }, [text]);
+
+  return (
+    <div ref={box} aria-hidden className="mt-16 w-full overflow-hidden">
+      <span ref={word} className="display-xl block w-max select-none whitespace-nowrap text-paper/[0.05]" style={{ fontSize: "12vw" }}>
+        {text}
+      </span>
+    </div>
+  );
+}
 
 export function Footer() {
   const socials = Object.entries(site.socials).filter(([, url]) => url);
@@ -26,12 +57,6 @@ export function Footer() {
                 {l}
               </p>
             ))}
-            <p className="mt-4">
-              <span className="label mr-2">Email</span>
-              <a href={`mailto:${site.email}`} className="ss break-all text-paper underline decoration-red decoration-2 underline-offset-4" data-text={site.email}>
-                {site.email}
-              </a>
-            </p>
           </address>
 
           <div className="md:col-span-3">
@@ -54,14 +79,12 @@ export function Footer() {
           </div>
         </div>
 
-        <div aria-hidden className="mt-16 overflow-hidden">
-          <p data-n={site.name} className="display-xl select-none whitespace-nowrap text-[clamp(3rem,17vw,15rem)] text-paper/[0.05] before:content-[attr(data-n)]" />
-        </div>
+        <FitWordmark text={site.name} />
 
         <div className="mt-4 flex flex-col gap-2 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="mono text-xs text-mute">© {new Date().getFullYear()} {site.shortName} · {site.institute.short}</p>
           <p className="mono text-xs text-mute">
-            Built by <span className="text-paper">Prasthanam</span> <span aria-hidden className="text-red">●</span> press <kbd className="text-cyan">`</kbd>
+           
           </p>
         </div>
       </div>

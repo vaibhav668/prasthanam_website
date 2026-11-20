@@ -1,71 +1,18 @@
-import { Component, Suspense, lazy, useEffect, useRef, useState, type ReactNode } from "react";
 import { hero } from "../data/hero";
 import { sections } from "../data/sections";
 import { site } from "../config/site";
-import { useDeviceTier } from "../hooks/useDeviceTier";
 import { useReducedMotion } from "../hooks/useReducedMotion";
 import { Button } from "../components/ui/Button";
-import { WebShot } from "../components/effects/WebShot";
 import { Annotation } from "../components/ui/Annotation";
-import SceneFallback from "../components/three/SceneFallback";
-
-const HeroScene = lazy(() => import("../components/three/HeroScene"));
-
-/** If WebGL blows up at runtime, fall back to the SVG bot. */
-class SceneBoundary extends Component<{ fallback: ReactNode; children: ReactNode }, { failed: boolean }> {
-  state = { failed: false };
-  static getDerivedStateFromError() {
-    return { failed: true };
-  }
-  render() {
-    return this.state.failed ? this.props.fallback : this.props.children;
-  }
-}
-
-const fallbackBot = (
-  <SceneFallback className="absolute right-[-10vw] top-[calc(var(--nav-h)+2svh)] w-[64vw] max-w-[440px] opacity-90 xs:right-[-6vw] sm:right-[2vw] sm:w-[44vw] md:top-[12svh] lg:right-[5vw] lg:top-[4svh] lg:w-[25vw] lg:max-w-[380px]" />
-);
 
 export default function Hero() {
-  const host = useRef<HTMLElement>(null);
-  const tier = useDeviceTier();
   const reduced = useReducedMotion();
-  const [load3d, setLoad3d] = useState(false);
-  const use3d = site.features.threeHero && tier === "high";
-
-  // Load the 3D chunk only after first paint + idle, so hero text is never blocked.
-  useEffect(() => {
-    if (!use3d) return;
-    const w = window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number };
-    const go = () => setLoad3d(true);
-    if (w.requestIdleCallback) w.requestIdleCallback(go, { timeout: 1800 });
-    else setTimeout(go, 700);
-  }, [use3d]);
 
   return (
-    <section id="top" ref={host} aria-labelledby="hero-title" className="relative isolate flex min-h-[100svh] flex-col overflow-hidden">
+    <section id="top" aria-labelledby="hero-title" className="relative isolate flex min-h-[100svh] flex-col overflow-hidden">
       {/* static backdrop */}
       <div aria-hidden className="gridpaper pointer-events-none absolute inset-0 -z-10 opacity-60 [mask-image:linear-gradient(to_bottom,black_40%,transparent)]" />
       <div aria-hidden className="halftone pointer-events-none absolute -left-20 bottom-0 -z-10 h-[50%] w-[60%] [mask-image:radial-gradient(closest-side,black,transparent)]" />
-
-      {/* P-8 */}
-      {/* desktop: P-8 hangs in front of the title; mobile: behind it for legibility */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 z-0 lg:z-20">
-        {tier &&
-          (use3d ? (
-            load3d && (
-              <SceneBoundary fallback={fallbackBot}>
-                <Suspense fallback={null}>
-                  <HeroScene className="absolute inset-0" />
-                </Suspense>
-              </SceneBoundary>
-            )
-          ) : (
-            fallbackBot
-          ))}
-      </div>
-
-      <WebShot hostRef={host} enabled={site.features.webShooter && !reduced} />
 
       <div className="wrap relative z-10 flex flex-1 flex-col pb-8 pt-[calc(var(--nav-h)+var(--safe-t)+20px)] sm:pb-10">
         <div className="flex items-start justify-between gap-4">

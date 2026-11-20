@@ -99,8 +99,7 @@ export function Terminal() {
         team.forEach((p) => out.push({ kind: "out", text: `  [${p.tier.padEnd(7)}] ${p.name} — ${p.role}` }));
         break;
       case "contact": {
-        out.push({ kind: "out", text: "access request: send us a message." });
-        out.push({ kind: "out", text: `  email      ${site.email}` });
+        out.push({ kind: "out", text: "access request: find us here." });
         Object.entries(site.socials)
           .filter(([, url]) => url)
           .forEach(([k, url]) => out.push({ kind: "out", text: `  ${k.padEnd(10)} ${url}` }));

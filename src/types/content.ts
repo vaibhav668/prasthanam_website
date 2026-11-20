@@ -46,7 +46,7 @@ export type EventType = "workshop" | "competition" | "fest" | "talk";
 export interface Event {
   id: string;
   title: string;
-  /** ISO date ("2026-02-14") or "TBA" */
+  /** Year only, e.g. "2026" */
   date: string;
   type: EventType;
   description: string;

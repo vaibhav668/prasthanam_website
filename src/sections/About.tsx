@@ -4,14 +4,18 @@ import { sections } from "../data/sections";
 import { Section } from "../components/layout/Section";
 import { SectionHeader } from "../components/layout/SectionHeader";
 import { Counter } from "../components/ui/Counter";
-import { Annotation } from "../components/ui/Annotation";
+import { CampusBanner } from "./about/CampusBanner";
 
 export default function About() {
   return (
     <Section id="about">
       <div className="wrap">
         <SectionHeader id="about" index={2} label={sections.about.label} title={about.heading} />
+      </div>
 
+      <CampusBanner />
+
+      <div className="wrap">
         <div className="grid gap-12 md:grid-cols-12">
           <div className="space-y-5 text-[clamp(1rem,1.3vw,1.15rem)] leading-relaxed text-paper/85 md:col-span-6 md:col-start-4 lg:col-span-5 lg:col-start-4">
             {about.paragraphs.map((p, i) => (
@@ -31,7 +35,6 @@ export default function About() {
                   </dd>
                 </div>
               ))}
-              <Annotation text={sections.about.statsNote} rotate={-2} className="absolute -bottom-10 right-0 hidden w-[260px] text-right lg:block" />
             </dl>
           )}
         </div>

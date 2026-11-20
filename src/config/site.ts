@@ -4,7 +4,6 @@
  * name / shortName   Club name shown in navbar, footer, page title.
  * tagline            One-liner used in the footer and meta.
  * institute          Full institute name + address lines (footer).
- * email              Contact email. Shown as plain text AND as a mailto link.
  * socials            Leave a value as "" to hide that icon.
  * logo               Club logo files in /public/images (small = navbar, large = footer/intro).
  * features           Feature flags. Turn things off without touching components.
@@ -21,18 +20,17 @@ export const site = {
     address: ["Ghurdauri, Pauri Garhwal", "Uttarakhand 246194, India"],
     mapUrl: "https://maps.google.com/?q=GB+Pant+Institute+of+Engineering+and+Technology+Ghurdauri",
   },
-  email: "prasthanam.club@example.com", // SAMPLE — replace with the real club email
+  ///email: "prasthanam.club@example.com", // SAMPLE — replace with the real club email
   socials: {
-    instagram: "https://instagram.com/", // SAMPLE
-    linkedin: "https://linkedin.com/", // SAMPLE
-    github: "https://github.com/", // SAMPLE
+    instagram: "https://www.instagram.com/prasthanam_gbpiet/",
+    linkedin: "https://www.linkedin.com/company/prasthanam-gbpiet/",
     youtube: "",
   },
   logo: { small: "/images/logo-64.png", large: "/images/logo-128.png" },
   collegeLogo: "/images/gbpiet-logo.png", // college crest, shown at both ends of the navbar
   features: {
     threeHero: true, // false → always use the SVG P-8 (no WebGL at all)
-    bootIntro: true, // first-visit assembly intro
+    bootIntro: true, // P-8 assembly intro on every load / refresh
     webShooter: true, // click/tap empty hero space to shoot a web
     terminal: true, // ` / ~ easter-egg terminal
     xray: true, // blueprint/wireframe toggle in the navbar

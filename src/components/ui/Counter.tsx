@@ -1,16 +1,17 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useInView } from "../../hooks/useInView";
 import { prefersReducedMotion } from "../../hooks/useReducedMotion";
 
-/** Counts up once when scrolled into view. Writes textContent directly (no re-renders). */
-export function Counter({ value, suffix = "", duration = 1400 }: { value: number; suffix?: string; duration?: number }) {
-  const [ref, inView] = useInView<HTMLSpanElement>({ once: true, threshold: 0.4 });
-  const done = useRef(false);
-
+/** Counts up from 0 every time it scrolls into view. Writes textContent directly (no re-renders). */
+export function Counter({ value, suffix = "", duration = 2200 }: { value: number; suffix?: string; duration?: number }) {
+  const [ref, inView] = useInView<HTMLSpanElement>({ threshold: 0.6 });
   useEffect(() => {
     const el = ref.current;
-    if (!el || !inView || done.current) return;
-    done.current = true;
+    if (!el) return;
+    if (!inView) {
+      el.textContent = `0${suffix}`; // reset so it replays on the next entry
+      return;
+    }
     if (prefersReducedMotion()) {
       el.textContent = `${value}${suffix}`;
       return;
@@ -19,7 +20,7 @@ export function Counter({ value, suffix = "", duration = 1400 }: { value: number
     const t0 = performance.now();
     const tick = (t: number) => {
       const p = Math.min(1, (t - t0) / duration);
-      const eased = 1 - Math.pow(1 - p, 3);
+      const eased = 1 - Math.pow(1 - p, 2); // gentle ease-out: small numbers visibly tick up
       el.textContent = `${Math.round(value * eased)}${suffix}`;
       if (p < 1) raf = requestAnimationFrame(tick);
     };

@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { p8 } from "../../lib/p8Store";
+import { notifyShot, p8 } from "../../lib/p8Store";
 
 interface Shot {
   id: number;
-  x: number; // origin, relative to host
+  x: number; // origin, viewport px
   y: number;
   len: number;
   angle: number; // deg
@@ -13,51 +13,52 @@ interface Shot {
 
 const MAX = 4;
 const LIFE = 1100;
-const INTERACTIVE = "a,button,input,select,textarea,label,[role=button],[data-no-web]";
+const INTERACTIVE = "a,button,input,select,textarea,label,summary,[role=button],[role=tab],[role=dialog],[contenteditable],[data-no-web]";
 
 /**
- * Click/tap empty space inside `hostRef` → P-8 fires a strand to that point and
- * leaves a web splat. Strands are rotated divs scaled on X (transform-only).
- * At most 4 alive at once; oldest is dropped.
+ * Click/tap any empty spot on the page → P-8 fires a strand from its eye to that
+ * point and leaves a web splat. Works on every section (P-8 is fixed to the viewport).
+ * Clicks on links, buttons, form fields and open dialogs are ignored.
+ * Strands are rotated divs scaled on X (transform-only). At most 4 alive at once.
  */
-export function WebShot({ hostRef, enabled }: { hostRef: React.RefObject<HTMLElement>; enabled: boolean }) {
+export function WebShot({ enabled }: { enabled: boolean }) {
   const [shots, setShots] = useState<Shot[]>([]);
   const idRef = useRef(0);
   const timers = useRef<number[]>([]);
 
   const fire = useCallback((e: PointerEvent) => {
-    const host = hostRef.current;
-    if (!host || e.button > 0) return;
-    if ((e.target as Element).closest(INTERACTIVE)) return;
-    const rect = host.getBoundingClientRect();
+    if (e.button > 0) return;
+    const target = e.target as Element | null;
+    if (!target?.closest || target.closest(INTERACTIVE)) return;
+    if (document.querySelector('[aria-modal="true"]')) return; // a pop-up is open
     const eye = p8.getEye?.();
     if (!eye) return;
-    const x = eye.x - rect.left;
-    const y = eye.y - rect.top;
-    const tx = e.clientX - rect.left;
-    const ty = e.clientY - rect.top;
+    const x = eye.x;
+    const y = eye.y;
+    const tx = e.clientX;
+    const ty = e.clientY;
     const dx = tx - x;
     const dy = ty - y;
     const len = Math.hypot(dx, dy);
     if (len < 24) return;
     const shot: Shot = { id: ++idRef.current, x, y, tx, ty, len, angle: (Math.atan2(dy, dx) * 180) / Math.PI };
     setShots((s) => [...s.slice(-(MAX - 1)), shot]);
+    notifyShot(tx, ty);
     const t = window.setTimeout(() => setShots((s) => s.filter((k) => k.id !== shot.id)), LIFE);
     timers.current.push(t);
-  }, [hostRef]);
+  }, []);
 
   useEffect(() => {
-    const host = hostRef.current;
-    if (!host || !enabled) return;
-    host.addEventListener("pointerdown", fire, { passive: true });
-    return () => host.removeEventListener("pointerdown", fire);
-  }, [hostRef, enabled, fire]);
+    if (!enabled) return;
+    document.addEventListener("pointerdown", fire, { passive: true });
+    return () => document.removeEventListener("pointerdown", fire);
+  }, [enabled, fire]);
 
   useEffect(() => () => timers.current.forEach(clearTimeout), []);
 
   if (!enabled) return null;
   return (
-    <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-30 overflow-hidden">
+    <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-[70] overflow-hidden">
       {shots.map((s) => (
         <div key={s.id}>
           <div

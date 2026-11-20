@@ -7,6 +7,7 @@ import { Footer } from "./components/layout/Footer";
 import { Grain } from "./components/layout/Grain";
 import { Terminal } from "./components/effects/Terminal";
 import { BootIntro } from "./components/effects/BootIntro";
+import { P8Layer } from "./components/effects/P8Layer";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import { setLenis } from "./lib/scroll";
@@ -54,6 +55,7 @@ export default function App() {
           </Routes>
         </main>
         <Footer />
+        <P8Layer />
         {site.features.terminal && <Terminal />}
         <Grain />
       </MotionConfig>

@@ -80,6 +80,7 @@ export const P8Svg = forwardRef<SVGGElement, Props>(function P8Svg({ className =
 
       {/* lens eye */}
       <g className={part("eye")}>
+       <g className={animated ? "p8-blink" : undefined}>
         <circle cx="200" cy="216" r="30" fill="#0B0B0C" stroke="#EDE8DE" strokeWidth="2" />
         <circle cx="200" cy="216" r="24" fill="#E10600" />
         <circle cx="200" cy="216" r="24" fill="none" stroke="#ff6a5c" strokeWidth="1" strokeDasharray="3 4" />
@@ -87,6 +88,7 @@ export const P8Svg = forwardRef<SVGGElement, Props>(function P8Svg({ className =
           <circle cx="200" cy="216" r="9" fill="#0B0B0C" />
           <circle cx="196" cy="212" r="3" fill="#EDE8DE" />
         </g>
+       </g>
       </g>
     </svg>
   );

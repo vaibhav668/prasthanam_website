@@ -13,8 +13,6 @@ const loaders = [
   () => import("../sections/Achievements"),
   () => import("../sections/Alumni"),
   () => import("../sections/Gallery"),
-  () => import("../sections/Sponsors"),
-  () => import("../sections/FAQ"),
 ];
 const SECTIONS: LazyExoticComponent<ComponentType>[] = loaders.map((l) => lazy(l));
 

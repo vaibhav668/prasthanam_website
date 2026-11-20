@@ -4,21 +4,15 @@ import { site } from "../../config/site";
 import { P8Svg } from "../three/P8Svg";
 import { prefersReducedMotion } from "../../hooks/useReducedMotion";
 
-const KEY = "p8-booted-v1";
 const DURATION = 1350; // < 1.5 s total
 
 function shouldShow() {
-  if (!site.features.bootIntro || prefersReducedMotion()) return false;
-  try {
-    return !localStorage.getItem(KEY);
-  } catch {
-    return false;
-  }
+  return site.features.bootIntro && !prefersReducedMotion();
 }
 
 /**
- * First-visit intro: P-8 assembles from parts while mono status lines print.
- * Skippable (button, Esc, any click). Never shown again after the first visit.
+ * Load intro: P-8 assembles from parts while mono status lines print.
+ * Plays on every page load and every refresh. Skippable (button, Esc, any click).
  * It's a fixed overlay — the hero underneath is already painted (LCP unaffected).
  */
 export function BootIntro() {
@@ -28,11 +22,6 @@ export function BootIntro() {
 
   useEffect(() => {
     if (!show) return;
-    try {
-      localStorage.setItem(KEY, "1");
-    } catch {
-      /* private mode — fine */
-    }
     const step = (DURATION - 250) / hero.bootLines.length;
     const ticks = hero.bootLines.map((_, i) => window.setTimeout(() => setCount(i + 1), 120 + i * step));
     const done = window.setTimeout(() => setLeaving(true), DURATION);

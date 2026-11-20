@@ -5,7 +5,7 @@ import { sections } from "../../data/sections";
 import { site } from "../../config/site";
 import { Avatar } from "./Avatar";
 
-const SOCIAL: Record<string, string> = { linkedin: "LinkedIn", github: "GitHub", instagram: "Instagram" };
+const SOCIAL: Record<string, string> = { linkedin: "LinkedIn", instagram: "Instagram" };
 
 /** Holographic agent ID for the selected member. Tilts + foil sheen on mouse hover. */
 export function MemberCard({ member, index, total, reduced }: { member: Member; index: number; total: number; reduced: boolean }) {

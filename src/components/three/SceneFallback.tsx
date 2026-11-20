@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { P8Svg } from "./P8Svg";
-import { p8 } from "../../lib/p8Store";
+import { onShot, p8 } from "../../lib/p8Store";
 import { subscribePointer, pointer } from "../../hooks/usePointer";
 import { prefersReducedMotion } from "../../hooks/useReducedMotion";
 
@@ -14,6 +14,7 @@ export default function SceneFallback({ className = "" }: { className?: string }
   const dropRef = useRef<HTMLDivElement>(null);
   const pupilRef = useRef<SVGGElement>(null);
   const eyeAnchor = useRef<HTMLDivElement>(null);
+  const bodyRef = useRef<HTMLDivElement>(null);
   const reduced = prefersReducedMotion();
 
   useEffect(() => {
@@ -35,20 +36,41 @@ export default function SceneFallback({ className = "" }: { className?: string }
     };
     const unsub = subscribePointer(track);
 
+    // recoil + eye flash on every web shot (restart the CSS animation)
+    const unsubShot = onShot(() => {
+      const b = bodyRef.current;
+      if (!b || reduced) return;
+      b.classList.remove("p8-recoil");
+      void b.offsetWidth;
+      b.classList.add("p8-recoil");
+    });
+
     let raf = 0;
     const onScroll = () => {
-      if (raf || reduced) return;
+      if (raf) return; // position only (no animation), so it also runs with reduced motion
       raf = requestAnimationFrame(() => {
         raf = 0;
         const h = window.innerHeight;
-        const p = Math.min(1, Math.max(0, window.scrollY / h));
-        if (dropRef.current) dropRef.current.style.transform = `translate3d(0, ${p * h * 0.32}px, 0)`;
+        const s = window.scrollY / h;
+        const p = Math.min(1, Math.max(0, s));
+        // past the hero: rise back up, shrink and tuck into the top-right corner
+        const t = Math.min(1, Math.max(0, (s - 0.85) / 0.65));
+        const dock = t * t * (3 - 2 * t);
+        const el = dropRef.current;
+        if (el) {
+          const r = el.offsetLeft + el.offsetWidth; // right edge in the fixed layer
+          const toRight = (window.innerWidth - 16 - r) * dock;
+          el.style.transformOrigin = "100% 0";
+          el.style.transform = `translate3d(${toRight}px, ${p * h * 0.32 * (1 - dock)}px, 0) scale(${1 - 0.55 * dock})`;
+        }
         track();
       });
     };
     window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
     return () => {
       unsub();
+      unsubShot();
       window.removeEventListener("scroll", onScroll);
       cancelAnimationFrame(raf);
       p8.getEye = null;
@@ -58,7 +80,7 @@ export default function SceneFallback({ className = "" }: { className?: string }
   return (
     <div ref={dropRef} className={`will-change-transform ${className}`}>
       <div className={reduced ? "" : "p8-swing"} style={{ transformOrigin: "50% -200%" }}>
-        <div className="relative">
+        <div ref={bodyRef} className="relative">
           <P8Svg ref={pupilRef} animated={!reduced} className="h-auto w-full [&_g]:transition-transform [&_g]:duration-150" />
           {/* invisible anchor centred on the lens: origin for web shots + eye tracking */}
           <div ref={eyeAnchor} aria-hidden className="absolute h-px w-px" style={{ left: "50%", top: `${(216 / 380) * 100}%` }} />
