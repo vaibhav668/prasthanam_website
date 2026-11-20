@@ -2,11 +2,9 @@ import type { Project } from "../../types/content";
 import { Modal } from "../../components/ui/Modal";
 import { Button } from "../../components/ui/Button";
 import { ProjectArt } from "./ProjectArt";
-import { team } from "../../data/team";
 import { sections } from "../../data/sections";
 
 export function ProjectModal({ project, onClose }: { project: Project | null; onClose: () => void }) {
-  const builders = (project?.team ?? []).map((id) => team.find((mm) => mm.id === id)).filter((x): x is NonNullable<typeof x> => !!x);
   return (
     <Modal open={!!project} onClose={onClose} label={project?.title ?? "Project"}>
       {project && (
@@ -48,13 +46,6 @@ export function ProjectModal({ project, onClose }: { project: Project | null; on
                 </li>
               ))}
             </ul>
-
-            {builders.length > 0 && (
-              <p className="mt-4 text-xs text-paper/75">
-                <span className="label mr-2">{sections.projects.teamLabel}</span>
-                {builders.map((b) => `${b.name} (${b.role})`).join(", ")}
-              </p>
-            )}
 
             {(project.github || project.video) && (
               <div className="mt-5 flex flex-wrap gap-3">

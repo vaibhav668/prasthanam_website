@@ -48,7 +48,7 @@ const items: MemberInput[] = [
   },
   {
     id: "member-02",
-    name: "Aadarsh",
+    name: "Adarsh Kumar",
     branch: "EE",
     year: "4th Year",
     socials: { linkedin: "https://www.linkedin.com/in/adarsh-kr-bhagat-abb95940b/" },

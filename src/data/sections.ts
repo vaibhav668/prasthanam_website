@@ -27,7 +27,6 @@ export const sections = {
     empty: "No builds yet. Go build one.",
     open: "Open spec sheet",
     specsLabel: "Spec sheet",
-    teamLabel: "Built by",
     links: { github: "Source", video: "Video" },
   },
   team: {

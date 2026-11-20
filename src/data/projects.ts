@@ -17,7 +17,6 @@ import { withPhotos } from "../lib/photos";
  * image        Optional override. Normally leave it out: drop "<id>.webp" into
  *              src/assets/photos/projects/ and it is picked up automatically.
  * github/video Optional links.
- * team         Optional member ids from data/team.ts.
  *
  * ALL ENTRIES BELOW ARE SAMPLE PLACEHOLDERS.
  */
@@ -39,7 +38,6 @@ const items: Project[] = [
       { label: "Algorithm", value: "Flood fill" },
       { label: "Control", value: "PID (tuned)" },
     ],
-    team: ["member-01", "member-03"],
   },
   {
     id: "leopard_detection_alert",
@@ -54,7 +52,6 @@ const items: Project[] = [
     specs: [
      
     ],
-    team: ["member-02"],
   },
   {
     id: "virtual-steering-car",
