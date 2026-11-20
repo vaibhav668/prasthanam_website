@@ -47,15 +47,16 @@ export default function App() {
           Skip to content
         </a>
         <BootIntro />
+        {/* before <main> in the DOM so, on phones, page content paints over it */}
+        <P8Layer />
         <Navbar />
-        <main id="main" tabIndex={-1}>
+        <main id="main" tabIndex={-1} className="relative">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
         <Footer />
-        <P8Layer />
         {site.features.terminal && <Terminal />}
         <Grain />
       </MotionConfig>

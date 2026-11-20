@@ -27,8 +27,8 @@ const fallbackBot = (
  * it hangs over the hero, then tucks into the top-right corner as you scroll on.
  * Click / tap any empty spot anywhere and it fires a web there.
  *
- * Layering: in front of the content on desktop (it never takes clicks), behind it on
- * small screens so it never covers text.
+ * Layering: in front of the content on desktop (it never takes clicks). On small screens it
+ * sits just behind <main> (which is positioned and comes later in the DOM) so it never covers text.
  */
 export function P8Layer() {
   const tier = useDeviceTier();
@@ -47,7 +47,7 @@ export function P8Layer() {
 
   return (
     <>
-      <div aria-hidden className="pointer-events-none fixed inset-0 -z-[1] lg:z-[55]">
+      <div aria-hidden className="pointer-events-none fixed inset-0 z-0 lg:z-[55]">
         {tier &&
           (use3d ? (
             load3d && (

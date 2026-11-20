@@ -20,7 +20,7 @@ const tmp = new THREE.Vector3();
 /** 0 while over the hero → 1 once you've scrolled past it (P-8 "docks" in the corner). */
 export function dockProgress() {
   const s = window.scrollY / Math.max(1, window.innerHeight);
-  return THREE.MathUtils.smoothstep(s, 0.85, 1.5);
+  return window.innerWidth < 640 ? THREE.MathUtils.smoothstep(s, 0.25, 0.7) : THREE.MathUtils.smoothstep(s, 0.85, 1.5);
 }
 
 /** Optional GLB (site.modelUrl). Loaded in its own chunk so drei is only fetched when used. */

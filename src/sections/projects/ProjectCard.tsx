@@ -63,13 +63,13 @@ export function ProjectCard({ project, index, onOpen }: { project: Project; inde
         <div className={`flex flex-1 flex-col gap-3 p-4 sm:p-5 ${v === "crt" ? "crt-glow" : ""}`}>
           <div className="flex items-baseline justify-between gap-3">
             <h3
-              className={
+              className={`min-w-0 [overflow-wrap:anywhere] ${
                 isComic
                   ? "font-display text-xl font-extrabold uppercase leading-none"
                   : v === "crt"
                     ? "mono text-lg font-semibold"
                     : "font-display text-lg font-medium leading-tight"
-              }
+              }`}
             >
               {v === "crt" && "> "}
               {project.title}

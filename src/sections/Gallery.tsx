@@ -5,7 +5,6 @@ import { Section } from "../components/layout/Section";
 import { SectionHeader } from "../components/layout/SectionHeader";
 import { EmptyState } from "../components/ui/EmptyState";
 import { Modal } from "../components/ui/Modal";
-import { Annotation } from "../components/ui/Annotation";
 
 /** Masonry (CSS columns) + lazy images + keyboard lightbox. */
 export default function Gallery() {
@@ -59,7 +58,6 @@ export default function Gallery() {
                     </span>
                   )}
                 </button>
-                {i === 0 && <Annotation kind="circle" text={copy.annotation} className="absolute right-4 top-6 h-[90px] w-[150px] pt-9 text-center" rotate={-6} />}
               </li>
             ))}
           </ul>

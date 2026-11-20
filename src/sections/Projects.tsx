@@ -32,10 +32,11 @@ export default function Projects() {
         {projects.length === 0 ? (
           <EmptyState message={copy.empty} />
         ) : (
-          <ul className="grid gap-8 pb-10 sm:grid-cols-2 xl:grid-cols-3 xl:gap-10">
+          <ul className="grid grid-cols-[minmax(0,1fr)] gap-8 pb-10 sm:grid-cols-2 xl:grid-cols-3 xl:gap-10">
             {projects.map((p, i) => (
                 <m.li
                   key={p.id}
+                  className="min-w-0"
                   initial={{ opacity: 0, y: 18 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-8% 0px" }}

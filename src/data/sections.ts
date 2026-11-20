@@ -81,7 +81,6 @@ export const sections = {
     title: "Life at Prasthanam.",
     kicker: "Solder smoke, arena dust, 3 a.m. debugging.",
     empty: "No photos yet.",
-    annotation: "sample — swap me",
     prev: "Previous",
     next: "Next",
   },

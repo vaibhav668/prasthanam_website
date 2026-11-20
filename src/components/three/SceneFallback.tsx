@@ -54,7 +54,8 @@ export default function SceneFallback({ className = "" }: { className?: string }
         const s = window.scrollY / h;
         const p = Math.min(1, Math.max(0, s));
         // past the hero: rise back up, shrink and tuck into the top-right corner
-        const t = Math.min(1, Math.max(0, (s - 0.85) / 0.65));
+        const phone = window.innerWidth < 640; // phones: tuck into the corner sooner so it never sits over headings
+        const t = Math.min(1, Math.max(0, (s - (phone ? 0.25 : 0.85)) / (phone ? 0.45 : 0.65)));
         const dock = t * t * (3 - 2 * t);
         const el = dropRef.current;
         if (el) {

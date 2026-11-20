@@ -44,7 +44,7 @@ export function Footer() {
           <div className="md:col-span-5">
             <a href="#top" onClick={(e) => handleAnchorClick(e, "#top")} className="inline-flex items-center gap-3 text-paper">
               <LogoMark size={84} />
-              <span className="font-display text-2xl font-extrabold tracking-[-0.03em]">{site.name}</span>
+              <span className="font-display text-xl font-extrabold tracking-[-0.03em] sm:text-2xl">{site.name}</span>
             </a>
             <p className="mt-4 max-w-[38ch] text-paper/70">{site.tagline}</p>
           </div>
